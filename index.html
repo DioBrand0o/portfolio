@@ -3,69 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio DevSecOps - DioBrand0o</title>
+    <title>Portfolio DevSecOps</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Georgia', serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            background-image: url('assets/images/estampe-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
         }
+        
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.85);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .audience-choice {
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 50px;
+        }
+        
+        .nav-links {
             margin: 40px 0;
         }
-        .btn {
-            display: inline-block;
-            padding: 20px 40px;
-            margin: 20px;
+        
+        .nav-link {
+            display: block;
+            margin: 20px 0;
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            transition: transform 0.3s;
+            color: #2c2c2c;
+            border: 2px solid #2c2c2c;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        .btn-rh {
-            background: #007bff;
+        
+        .nav-link:hover {
+            background-color: #2c2c2c;
             color: white;
         }
-        .btn-tech {
-            background: #28a745;
-            color: white;
+        
+        .contact {
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 Portfolio DevSecOps</h1>
-        <p><strong>Infrastructure & Sécurité Cloud</strong></p>
-        
-        <div class="audience-choice">
-            <h2>Choisissez votre profil :</h2>
+    <div class="overlay">
+        <div class="container">
+            <h1>Portfolio DevSecOps</h1>
+            <p class="subtitle">Infrastructure & Sécurité Cloud</p>
             
-            <a href="rh.html" class="btn btn-rh">
-                👔 Version RH/Manager<br>
-                <small>Vue synthétique & impact business</small>
-            </a>
+            <div class="nav-links">
+                <a href="rh.html" class="nav-link">Version Manager</a>
+                <a href="tech.html" class="nav-link">Version Technique</a>
+            </div>
             
-            <a href="tech.html" class="btn btn-tech">
-                ⚙️ Version Technique<br>
-                <small>Détails architecture & code</small>
-            </a>
         </div>
-        
-        
     </div>
 </body>
 </html>
