@@ -1,0 +1,140 @@
+include:
+  - project: 'partage_devops/terraform_cd'
+    ref: main
+    file: '/.gitlab/ci/terraform-plan.yml'
+  - project: 'partage_devops/terraform_cd'
+    ref: main
+    file: '/.gitlab/ci/terraform-apply.yml'
+  - project: 'partage_devops/terraform_cd'
+    ref: main
+    file: '/.gitlab/ci/integration-security.yml'
+  - project: 'partage_devops/terraform_cd'
+    ref: main
+    file: '/.gitlab/ci/lead-approbation.yml'
+  - project: 'partage_devops/terraform_cd'
+    ref: main
+    file: '/.gitlab/ci/integration-diagram.yml'
+
+stages:
+  - plan
+  - security  
+  - analysis
+  - approval
+  - apply
+
+variables:
+  ENVIRONMENT: "dev"
+  TF_VERSION: "latest"
+  ENVIRONMENT_PREFIX: "dev"
+
+.dev_vars:
+  variables:
+    ENVIRONMENT_PREFIX: "dev"
+    TFVARS_FILE: "dev.tfvars"
+
+.prd_vars:
+  variables:
+    ENVIRONMENT_PREFIX: "prd"
+    TFVARS_FILE: "prd.tfvars"
+
+terraform_plan:
+  extends: .terraform_plan_template
+  only:
+    - merge_requests
+    - main
+
+security_check:
+  extends: .security_check_template
+  when: manual
+  allow_failure: true
+  needs:
+    - terraform_plan
+
+generate_diagram:
+  extends: .diagram_generation_template
+  stage: analysis
+  when: manual
+  allow_failure: true
+  needs:
+    - terraform_plan
+
+approval:
+  extends: .approval_template
+  needs:
+    - job: terraform_plan
+      artifacts: true
+    - job: security_check
+      optional: true
+    - job: generate_diagram
+      optional: true
+
+terraform_apply:
+  extends: .terraform_apply_template
+  needs:
+    - job: terraform_plan
+    - job: approval
+  only:
+    - main
+
+# ------------------ ENVIRONNEMENT PRD ------------------
+
+# Plan pour l'environnement PRD
+terraform_plan:prd:
+  extends:
+    - .terraform_plan_template
+    - .prd_vars
+  script:
+    - terraform init
+    - terraform workspace select ${ENVIRONMENT_PREFIX} || terraform workspace new ${ENVIRONMENT_PREFIX}
+    - terraform plan -var-file=${TFVARS_FILE} -out=plan.out
+    - terraform show -json plan.out > plan.json || true
+  when: manual
+  only:
+    - main
+
+security_check:prd:
+  extends:
+    - .security_check_template
+    - .prd_vars
+  when: manual
+  allow_failure: true
+  needs:
+    - terraform_plan:prd
+
+generate_diagram:prd:
+  extends:
+    - .diagram_generation_template
+    - .prd_vars
+  stage: analysis
+  when: manual
+  allow_failure: true
+  needs:
+    - terraform_plan:prd
+
+approval:prd:
+  extends:
+    - .approval_template
+    - .prd_vars
+  needs:
+    - job: terraform_plan:prd
+      artifacts: true
+    - job: security_check:prd
+      optional: true
+    - job: generate_diagram:prd
+      optional: true
+  only:
+    - main
+
+terraform_apply:prd:
+  extends:
+    - .terraform_apply_template
+    - .prd_vars
+  script:
+    - terraform init
+    - terraform workspace select ${ENVIRONMENT_PREFIX} || terraform workspace new ${ENVIRONMENT_PREFIX}
+    - terraform apply -var-file=${TFVARS_FILE} -auto-approve plan.out
+  needs:
+    - job: terraform_plan:prd
+    - job: approval:prd
+  only:
+    - main
