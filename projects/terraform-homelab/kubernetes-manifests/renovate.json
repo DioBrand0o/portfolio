@@ -1,0 +1,29 @@
+{
+  "extends": ["config:base"],
+  "gitAuthor": "Renovate Bot <renovate@gitlab.com>",
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommits": "enabled", 
+  "schedule": ["at any time"],
+  "timezone": "Europe/Paris",
+  "labels": ["dependencies", "renovate"],
+  "prConcurrentLimit": 2,
+  "baseBranches": ["main"],
+  "regexManagers": [
+    {
+      "fileMatch": ["\\.json$"],
+      "matchStrings": [
+        "\"chartRepoURL\":\\s*\"(?<registryUrl>[^\"]+)\",\\s*\"chart\":\\s*\"(?<depName>[^\"]+)\",\\s*\"chartVersion\":\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "{{depName}}",
+      "registryUrlTemplate": "{{registryUrl}}"
+    },
+    {
+      "fileMatch": ["\\.json$"],
+      "matchStrings": [
+        "\"repoURL\":\\s*\"https://github.com/(?<depName>[^\"]+)\",\\s*\"version\":\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "github-releases"
+    }
+  ]
+}
