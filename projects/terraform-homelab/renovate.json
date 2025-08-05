@@ -1,0 +1,20 @@
+{
+  "extends": ["config:base"],
+  "gitAuthor": "Renovate Bot <renovate@gitlab.com>",
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommits": "enabled", 
+  "schedule": ["at any time"],
+  "timezone": "Europe/Paris",
+  "labels": ["dependencies", "renovate"],
+  "prConcurrentLimit": 2,
+  "baseBranches": ["master"],
+  "regexManagers": [
+    {
+      "fileMatch": ["\\.tf$"],
+      "matchStrings": [
+        "# renovate: datasource=terraform-provider depName=(?<depName>[^\\s]+)\\s[\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "terraform-provider"
+    }
+  ]
+}
