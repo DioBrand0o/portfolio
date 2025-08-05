@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-monitoring
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  generators:
+    - git:
+        repoURL: https://gitlab.com/partage_devops/argocd.git
+        revision: HEAD
+        requeueAfterSeconds: 20
+        files:
+          - path: apps/apps-monitoring/*/prd/config.json
+  template:
+    metadata:
+      name: "{{ appName }}-{{ env }}"
+      namespace: argocd
+      labels:
+        app.kubernetes.io/type: "apps-monitoring"
+        app.kubernetes.io/name: "{{ appName }}"
+        app.kubernetes.io/env: "{{ env }}"
+    spec:
+      project: default
+      destination:
+        server: "{{ destServer }}"
+        namespace: "{{ destNamespace }}"
+      ignoreDifferences:
+        - group: apiextensions.k8s.io
+          kind: CustomResourceDefinition
+          jsonPointers:
+            - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
+      sources:
+        - repoURL: "{{ chartRepoURL }}"
+          chart: "{{ chart }}"
+          targetRevision: "{{ chartVersion }}"
+          helm:
+            releaseName: "{{ appName }}"
+            valueFiles:
+              - $values/{{ valuesPath }}
+        - repoURL: "{{ valuesGitRepo }}"
+          targetRevision: "{{ valuesGitRef }}"
+          ref: values
+        - repoURL: https://gitlab.com/partage_devops/argocd.git
+          targetRevision: HEAD
+          path: apps/apps-monitoring/{{ appName }}/extras
+          directory:
+            recurse: true
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true        
+          - Replace=true               
