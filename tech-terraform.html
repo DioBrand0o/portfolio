@@ -91,6 +91,14 @@
             color: #4fc3f7;
         }
         
+        .key-feature {
+            color: #ff4444;
+            font-weight: bold;
+            background-color: rgba(255, 68, 68, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
         .comment {
             color: #75715e;
         }
@@ -191,17 +199,17 @@
                 <div class="code-title">Génération dynamique des nodes</div>
                 <div class="code-block">
 <span class="keyword">locals</span> {
-  <span class="highlight">controller_nodes</span> = [
+  <span class="key-feature">controller_nodes</span> = [
     <span class="keyword">for</span> i <span class="keyword">in</span> <span class="highlight">range</span>(var.controller_count) : {
-      <span class="string">name</span>    = <span class="string">"c${i}"</span>
-      <span class="string">address</span> = <span class="highlight">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_controller_hostnum + i)
-    }
+      <span class="string">name</span>    = <span class="string">"c${i}"</span>             <span class="comment"># 🔑 Génération dynamique des noms</span>
+      <span class="string">address</span> = <span class="key-feature">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_controller_hostnum + i)
+    }                                        <span class="comment"># 🔑 Calcul automatique des IPs</span>
   ]
 
-  <span class="highlight">worker_nodes</span> = [
+  <span class="key-feature">worker_nodes</span> = [
     <span class="keyword">for</span> i <span class="keyword">in</span> <span class="highlight">range</span>(var.worker_count) : {
       <span class="string">name</span>    = <span class="string">"w${i}"</span>
-      <span class="string">address</span> = <span class="highlight">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_worker_hostnum + i)
+      <span class="string">address</span> = <span class="key-feature">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_worker_hostnum + i)
     }
   ]
 }</div>
@@ -261,51 +269,51 @@
 <span class="highlight">common_machine_config</span> = {
   <span class="highlight">machine</span> = {
     <span class="highlight">features</span> = {
-      <span class="highlight">kubePrism</span> = {                  <span class="comment"># Load balancer interne</span>
+      <span class="key-feature">kubePrism</span> = {                  <span class="comment"># 🔑 Load balancer interne Talos (pas besoin HAProxy)</span>
         <span class="string">enabled</span> = true
-        <span class="string">port</span>    = 7445
+        <span class="string">port</span>    = <span class="key-feature">7445</span>                  <span class="comment"># Port custom pour éviter conflits</span>
       }
-      <span class="highlight">hostDNS</span> = {                   <span class="comment"># DNS forwarding</span>
+      <span class="key-feature">hostDNS</span> = {                   <span class="comment"># 🔑 DNS forwarding host ↔ pods</span>
         <span class="string">enabled</span>              = true
-        <span class="string">forwardKubeDNSToHost</span> = true
+        <span class="string">forwardKubeDNSToHost</span> = true      <span class="comment"># Résolution bidirectionnelle</span>
       }
     }
     <span class="highlight">kernel</span> = {
-      <span class="highlight">modules</span> = [                   <span class="comment"># Modules pour stockage distribué</span>
+      <span class="key-feature">modules</span> = [                   <span class="comment"># 🔑 Modules pour stockage distribué DRBD</span>
         {
-          <span class="string">name</span>       = <span class="string">"drbd"</span>
-          <span class="string">parameters</span> = [<span class="string">"usermode_helper=disabled"</span>]
+          <span class="string">name</span>       = <span class="key-feature">"drbd"</span>
+          <span class="string">parameters</span> = [<span class="key-feature">"usermode_helper=disabled"</span>]  <span class="comment"># Optimisation kernel</span>
         },
         {
-          <span class="string">name</span> = <span class="string">"drbd_transport_tcp"</span>
+          <span class="string">name</span> = <span class="key-feature">"drbd_transport_tcp"</span>        <span class="comment"># Transport réseau optimisé</span>
         }
       ]
     }
   }
   <span class="highlight">cluster</span> = {
     <span class="highlight">network</span> = {
-      <span class="highlight">cni</span> = {
-        <span class="string">name</span> = <span class="string">"none"</span>                <span class="comment"># Cilium géré par Terraform</span>
+      <span class="key-feature">cni</span> = {
+        <span class="string">name</span> = <span class="key-feature">"none"</span>                <span class="comment"># 🔑 Pas de CNI par défaut - Cilium via Terraform</span>
       }
     }
-    <span class="highlight">proxy</span> = {
-      <span class="string">disabled</span> = true                <span class="comment"># Pas de kube-proxy (eBPF)</span>
+    <span class="key-feature">proxy</span> = {
+      <span class="string">disabled</span> = <span class="key-feature">true</span>                <span class="comment"># 🔑 Pas de kube-proxy - eBPF natif Cilium</span>
     }
   }
 }</div>
                 
                 <div class="code-title">VIP Failover - Haute disponibilité</div>
                 <div class="code-block">
-<span class="comment"># Configuration VIP pour failover automatique des control planes</span>
+<span class="comment"># 🔑 Configuration VIP pour failover automatique des control planes</span>
 <span class="highlight">yamlencode</span>({
   <span class="highlight">machine</span> = {
     <span class="highlight">network</span> = {
       <span class="highlight">interfaces</span> = [
         {
           <span class="string">interface</span> = <span class="string">"eth0"</span>
-          <span class="highlight">vip</span> = {
-            <span class="string">ip</span> = var.cluster_vip      <span class="comment"># IP virtuelle partagée</span>
-          }
+          <span class="key-feature">vip</span> = {
+            <span class="string">ip</span> = var.cluster_vip      <span class="comment"># 🔑 IP virtuelle partagée entre CPs - HA native</span>
+          }                                    <span class="comment"># Pas besoin de keepalived/HAProxy externe</span>
         }
       ]
     }
@@ -330,11 +338,11 @@
                 <div class="code-title">Exemple - Intégration Cilium via Terraform</div>
                 <div class="code-block">
 {
-  <span class="string">name</span> = <span class="string">"cilium"</span>
-  <span class="highlight">contents</span> = <span class="highlight">join</span>(<span class="string">"---\n"</span>, [
-    data.helm_template.cilium.manifest,                <span class="comment"># Chart Helm</span>
-    <span class="string">"# Source cilium.tf\n${local.cilium_external_lb_manifest}"</span>  <span class="comment"># Config LB</span>
-  ])
+  <span class="string">name</span> = <span class="key-feature">"cilium"</span>
+  <span class="highlight">contents</span> = <span class="key-feature">join</span>(<span class="string">"---\n"</span>, [
+    data.helm_template.cilium.manifest,                <span class="comment"># 🔑 Chart Helm pré-rendu</span>
+    <span class="string">"# Source cilium.tf\n${local.cilium_external_lb_manifest}"</span>  <span class="comment"># 🔑 Config LB externe intégrée</span>
+  ])                                                   <span class="comment"># Tout en un seul manifest</span>
 }</div>
             </div>
             
