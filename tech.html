@@ -97,6 +97,29 @@
             color: #4fc3f7;
             word-break: break-all;
         }
+        .tf-list {
+            margin-top: 20px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .tf-list li {
+            margin-bottom: 16px;
+        }
+        .tf-file-link {
+            font-weight: bold;
+            color: #2c2c2c;
+            text-decoration: none;
+            font-size: 1.05em;
+        }
+        .tf-file-link:hover {
+            text-decoration: underline;
+            color: #4fc3f7;
+        }
+        .tf-desc {
+            margin-top: 4px;
+            font-size: 0.95em;
+            color: #444;
+        }
         @media (max-width: 600px) {
             .tech-list { grid-template-columns: 1fr; }
         }
@@ -155,10 +178,23 @@
                 Accès au projet complet :<br>
                 <span class="github-link">https://github.com/DioBrand0o/portfolio/tree/main/projects/terraform-homelab/</span>
             </p>
-            <ul style="font-size: 1.05em; margin: 20px 0 0 20px;">
-                <li>Documentation détaillée incluse dans le <strong>README.md</strong> du projet.</li>
-                <li>Chaque lien ci-dessus pointe vers la configuration Terraform correspondante.</li>
-                <li>Configuration modulaire et réutilisable (Kubernetes, CNI, GitOps, Certificats, etc…)</li>
+            <ul class="tf-list">
+                <li>
+                    <a href="https://github.com/DioBrand0o/portfolio/blob/main/projects/terraform-homelab/02-infrastructure-vms.tf" target="_blank" class="tf-file-link">
+                        02-infrastructure-vms.tf
+                    </a>
+                    <div class="tf-desc">
+                        Provisionning complet des VMs Control Plane et Workers sur Proxmox, avec configuration hardware, TPM 2.0, disques, et réseau.
+                    </div>
+                </li>
+                <li>
+                    <a href="https://github.com/DioBrand0o/portfolio/blob/main/projects/terraform-homelab/03-talos-configuration.tf" target="_blank" class="tf-file-link">
+                        03-talos-configuration.tf
+                    </a>
+                    <div class="tf-desc">
+                        Configuration Talos Linux, gestion des secrets, application des configurations et bootstrap du cluster Kubernetes.
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
