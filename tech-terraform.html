@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure & Terraform - Portfolio DevSecOps</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .tech-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .back-nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .back-link {
+            color: #2c2c2c;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #2c2c2c;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .back-link:hover {
+            background-color: #2c2c2c;
+            color: white;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #2c2c2c;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 10px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .spec-item {
+            padding: 15px;
+            background-color: rgba(44, 44, 44, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #2c2c2c;
+        }
+        
+        .spec-title {
+            font-weight: bold;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+        }
+        
+        .code-title {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 8px 15px;
+            margin: 20px 0 0 0;
+            border-radius: 8px 8px 0 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            color: #4fc3f7;
+        }
+        
+        .comment {
+            color: #75715e;
+        }
+        
+        .string {
+            color: #a6e22e;
+        }
+        
+        .keyword {
+            color: #f92672;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+        }
+        
+        .feature-list li:before {
+            content: "✅ ";
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="tech-container">
+            
+            <!-- Navigation -->
+            <div class="back-nav">
+                <a href="tech.html" class="back-link">← Hub Technique</a>
+                <a href="index.html" class="back-link">🏠 Accueil</a>
+            </div>
+            
+            <h1 style="text-align: center; margin-bottom: 40px;">🏗️ Infrastructure & Terraform</h1>
+            
+            <!-- Vue d'ensemble -->
+            <div class="section">
+                <h2 class="section-title">🎯 Vue d'ensemble Infrastructure</h2>
+                <p><strong>Objectif :</strong> Provisioning automatisé d'un cluster Kubernetes haute disponibilité sur Proxmox avec OS immutable Talos Linux.</p>
+                
+                <p><strong>Approche :</strong> Infrastructure as Code complète avec Terraform, déploiement reproductible et configuration déclarative.</p>
+                
+                <p><strong>Résultat :</strong> Cluster 6 nodes déployé en 5 minutes avec bootstrap automatique, réseau sécurisé et applications core intégrées.</p>
+            </div>
+            
+            <!-- Architecture VMs -->
+            <div class="section">
+                <h2 class="section-title">💻 Architecture des VMs</h2>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-title">Control Planes (3x)</div>
+                        <div>Nom: c0, c1, c2</div>
+                        <div>CPU: 2 cores (host type)</div>
+                        <div>RAM: 4GB</div>
+                        <div>Disque: 30GB SSD</div>
+                        <div>Réseau: vmbr1</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Workers (3x)</div>
+                        <div>Nom: w0, w1, w2</div>
+                        <div>CPU: 4 cores (host type)</div>
+                        <div>RAM: 6GB</div>
+                        <div>Disque OS: 40GB SSD</div>
+                        <div>Disque Data: 60GB SSD</div>
+                        <div>Réseau: vmbr1</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Configuration Proxmox</div>
+                        <div>BIOS: OVMF (UEFI)</div>
+                        <div>Machine: Q35</div>
+                        <div>SCSI: virtio-scsi-single</div>
+                        <div>TPM: v2.0 activé</div>
+                        <div>Agent: QEMU Guest Agent</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Template Source</div>
+                        <div>VM ID: 999</div>
+                        <div>OS: Talos Linux</div>
+                        <div>Clone: Full clone</div>
+                        <div>Boot: Cloud-init ready</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Code Terraform VMs -->
+            <div class="section">
+                <h2 class="section-title">💻 Code Terraform - Provisioning VMs</h2>
+                
+                <div class="code-title">Génération dynamique des nodes</div>
+                <div class="code-block">
+<span class="keyword">locals</span> {
+  <span class="highlight">controller_nodes</span> = [
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="highlight">range</span>(var.controller_count) : {
+      <span class="string">name</span>    = <span class="string">"c${i}"</span>
+      <span class="string">address</span> = <span class="highlight">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_controller_hostnum + i)
+    }
+  ]
+
+  <span class="highlight">worker_nodes</span> = [
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="highlight">range</span>(var.worker_count) : {
+      <span class="string">name</span>    = <span class="string">"w${i}"</span>
+      <span class="string">address</span> = <span class="highlight">cidrhost</span>(var.cluster_node_network, var.cluster_node_network_first_worker_hostnum + i)
+    }
+  ]
+}</div>
+                
+                <div class="code-title">Control Plane VMs - Configuration complète</div>
+                <div class="code-block">
+<span class="keyword">resource</span> <span class="string">"proxmox_virtual_environment_vm"</span> <span class="string">"controller"</span> {
+  <span class="highlight">count</span>           = var.controller_count
+  <span class="highlight">name</span>            = <span class="string">"${var.prefix}-${local.controller_nodes[count.index].name}"</span>
+  <span class="highlight">node_name</span>       = <span class="string">"pve"</span>
+  <span class="highlight">tags</span>            = sort(concat(var.tags, [<span class="string">"controller"</span>]))
+  <span class="highlight">bios</span>            = <span class="string">"ovmf"</span>          <span class="comment"># UEFI moderne</span>
+  <span class="highlight">machine</span>         = <span class="string">"q35"</span>           <span class="comment"># Chipset moderne</span>
+  
+  <span class="highlight">cpu</span> {
+    <span class="string">type</span>  = <span class="string">"host"</span>                   <span class="comment"># Performance native</span>
+    <span class="string">cores</span> = 2
+  }
+  
+  <span class="highlight">memory</span> {
+    <span class="string">dedicated</span> = 4 * 1024            <span class="comment"># 4GB RAM</span>
+  }
+  
+  <span class="highlight">network_device</span> {
+    <span class="string">bridge</span> = <span class="string">"vmbr1"</span>                <span class="comment"># Réseau cluster isolé</span>
+    <span class="string">mtu</span>    = 1500
+  }
+  
+  <span class="highlight">tpm_state</span> {                        <span class="comment"># TPM 2.0 pour sécurité</span>
+    <span class="string">datastore_id</span> = var.default-datastoreid
+    <span class="string">version</span>      = <span class="string">"v2.0"</span>
+  }
+  
+  <span class="highlight">clone</span> {                           <span class="comment"># Clone template Talos</span>
+    <span class="string">vm_id</span> = 999
+    <span class="string">full</span>  = true
+  }
+  
+  <span class="highlight">initialization</span> {                  <span class="comment"># Cloud-init configuration</span>
+    <span class="string">datastore_id</span> = var.default-datastoreid
+    <span class="highlight">ip_config</span> {
+      <span class="highlight">ipv4</span> {
+        <span class="string">address</span> = <span class="string">"${local.controller_nodes[count.index].address}/24"</span>
+        <span class="string">gateway</span> = var.cluster_node_network_gateway
+      }
+    }
+  }
+}</div>
+            </div>
+            
+            <!-- Configuration Talos -->
+            <div class="section">
+                <h2 class="section-title">⚙️ Configuration Talos Linux</h2>
+                
+                <div class="code-title">Configuration commune - Features avancées</div>
+                <div class="code-block">
+<span class="highlight">common_machine_config</span> = {
+  <span class="highlight">machine</span> = {
+    <span class="highlight">features</span> = {
+      <span class="highlight">kubePrism</span> = {                  <span class="comment"># Load balancer interne</span>
+        <span class="string">enabled</span> = true
+        <span class="string">port</span>    = 7445
+      }
+      <span class="highlight">hostDNS</span> = {                   <span class="comment"># DNS forwarding</span>
+        <span class="string">enabled</span>              = true
+        <span class="string">forwardKubeDNSToHost</span> = true
+      }
+    }
+    <span class="highlight">kernel</span> = {
+      <span class="highlight">modules</span> = [                   <span class="comment"># Modules pour stockage distribué</span>
+        {
+          <span class="string">name</span>       = <span class="string">"drbd"</span>
+          <span class="string">parameters</span> = [<span class="string">"usermode_helper=disabled"</span>]
+        },
+        {
+          <span class="string">name</span> = <span class="string">"drbd_transport_tcp"</span>
+        }
+      ]
+    }
+  }
+  <span class="highlight">cluster</span> = {
+    <span class="highlight">network</span> = {
+      <span class="highlight">cni</span> = {
+        <span class="string">name</span> = <span class="string">"none"</span>                <span class="comment"># Cilium géré par Terraform</span>
+      }
+    }
+    <span class="highlight">proxy</span> = {
+      <span class="string">disabled</span> = true                <span class="comment"># Pas de kube-proxy (eBPF)</span>
+    }
+  }
+}</div>
+                
+                <div class="code-title">VIP Failover - Haute disponibilité</div>
+                <div class="code-block">
+<span class="comment"># Configuration VIP pour failover automatique des control planes</span>
+<span class="highlight">yamlencode</span>({
+  <span class="highlight">machine</span> = {
+    <span class="highlight">network</span> = {
+      <span class="highlight">interfaces</span> = [
+        {
+          <span class="string">interface</span> = <span class="string">"eth0"</span>
+          <span class="highlight">vip</span> = {
+            <span class="string">ip</span> = var.cluster_vip      <span class="comment"># IP virtuelle partagée</span>
+          }
+        }
+      ]
+    }
+  }
+})</div>
+            </div>
+            
+            <!-- Inline Manifests -->
+            <div class="section">
+                <h2 class="section-title">📦 Applications Core Intégrées</h2>
+                <p>Applications déployées automatiquement via <code>inlineManifests</code> lors du bootstrap :</p>
+                
+                <ul class="feature-list">
+                    <li><strong>Cilium CNI</strong> : Réseau eBPF avec LoadBalancer intégré</li>
+                    <li><strong>cert-manager</strong> : Gestion automatique des certificats TLS</li>
+                    <li><strong>trust-manager</strong> : Distribution des CA bundles</li>
+                    <li><strong>Reloader</strong> : Hot-reload des ConfigMaps/Secrets</li>
+                    <li><strong>ArgoCD</strong> : GitOps controller (optionnel)</li>
+                    <li><strong>Spin Runtime</strong> : Support WebAssembly</li>
+                </ul>
+                
+                <div class="code-title">Exemple - Intégration Cilium via Terraform</div>
+                <div class="code-block">
+{
+  <span class="string">name</span> = <span class="string">"cilium"</span>
+  <span class="highlight">contents</span> = <span class="highlight">join</span>(<span class="string">"---\n"</span>, [
+    data.helm_template.cilium.manifest,                <span class="comment"># Chart Helm</span>
+    <span class="string">"# Source cilium.tf\n${local.cilium_external_lb_manifest}"</span>  <span class="comment"># Config LB</span>
+  ])
+}</div>
+            </div>
+            
+            <!-- Bootstrap Process -->
+            <div class="section">
+                <h2 class="section-title">🚀 Processus de Bootstrap</h2>
+                
+                <div class="code-title">Application et Bootstrap automatique</div>
+                <div class="code-block">
+<span class="comment"># 1. Application de la configuration Talos</span>
+<span class="keyword">resource</span> <span class="string">"talos_machine_configuration_apply"</span> <span class="string">"controller"</span> {
+  <span class="highlight">count</span>                       = var.controller_count
+  <span class="highlight">client_configuration</span>        = talos_machine_secrets.talos.client_configuration
+  <span class="highlight">machine_configuration_input</span> = data.talos_machine_configuration.controller.machine_configuration
+  <span class="highlight">endpoint</span>                    = local.controller_nodes[count.index].address
+  <span class="highlight">node</span>                        = local.controller_nodes[count.index].address
+  
+  <span class="highlight">config_patches</span> = [
+    <span class="highlight">yamlencode</span>({
+      <span class="highlight">machine</span> = {
+        <span class="highlight">network</span> = {
+          <span class="string">hostname</span>    = local.controller_nodes[count.index].name
+          <span class="string">nameservers</span> = var.dns_serveurs
+        }
+        <span class="highlight">time</span> = {
+          <span class="string">servers</span> = var.ntp_serveurs        <span class="comment"># Synchronisation temps</span>
+        }
+      }
+    })
+  ]
+  
+  <span class="highlight">depends_on</span> = [
+    proxmox_virtual_environment_vm.controller
+  ]
+}
+
+<span class="comment"># 2. Bootstrap du cluster (premier control plane)</span>
+<span class="keyword">resource</span> <span class="string">"talos_machine_bootstrap"</span> <span class="string">"talos"</span> {
+  <span class="highlight">client_configuration</span> = talos_machine_secrets.talos.client_configuration
+  <span class="highlight">endpoint</span>             = local.controller_nodes[0].address
+  <span class="highlight">node</span>                 = local.controller_nodes[0].address
+  <span class="highlight">depends_on</span> = [
+    talos_machine_configuration_apply.controller
+  ]
+}</div>
+            </div>
+            
+            <!-- Fonctionnalités avancées -->
+            <div class="section">
+                <h2 class="section-title">🔧 Fonctionnalités Techniques Avancées</h2>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-title">Sécurité Proxmox</div>
+                        <div>✅ UEFI Secure Boot</div>
+                        <div>✅ TPM 2.0 intégré</div>
+                        <div>✅ Disques chiffrés</div>
+                        <div>✅ Agent sécurisé</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Réseau Isolé</div>
+                        <div>✅ Bridge vmbr1 dédié</div>
+                        <div>✅ VLAN aware</div>
+                        <div>✅ MTU optimisé</div>
+                        <div>✅ IPv6 désactivé</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Haute Disponibilité</div>
+                        <div>✅ VIP failover automatique</div>
+                        <div>✅ kubePrism load balancer</div>
+                        <div>✅ 3 control planes</div>
+                        <div>✅ Health checks intégrés</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">Performance</div>
+                        <div>✅ CPU host passthrough</div>
+                        <div>✅ Disques SSD avec TRIM</div>
+                        <div>✅ IOThread activé</div>
+                        <div>✅ SCSI virtio-scsi</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Outputs -->
+            <div class="section">
+                <h2 class="section-title">📤 Outputs et Intégration</h2>
+                
+                <div class="code-title">Génération automatique des configs</div>
+                <div class="code-block">
+<span class="comment"># Génération kubeconfig Kubernetes</span>
+<span class="keyword">resource</span> <span class="string">"talos_cluster_kubeconfig"</span> <span class="string">"talos"</span> {
+  <span class="highlight">client_configuration</span> = talos_machine_secrets.talos.client_configuration
+  <span class="highlight">endpoint</span>             = local.controller_nodes[0].address
+  <span class="highlight">node</span>                 = local.controller_nodes[0].address
+  <span class="highlight">depends_on</span> = [
+    talos_machine_bootstrap.talos
+  ]
+}
+
+<span class="comment"># Configuration client Talos</span>
+<span class="keyword">data</span> <span class="string">"talos_client_configuration"</span> <span class="string">"talos"</span> {
+  <span class="highlight">cluster_name</span>         = var.cluster_name
+  <span class="highlight">client_configuration</span> = talos_machine_secrets.talos.client_configuration
+  <span class="highlight">endpoints</span>            = [<span class="keyword">for</span> node <span class="keyword">in</span> local.controller_nodes : node.address]
+}</div>
+                
+                <p><strong>Résultat :</strong> Après <code>terraform apply</code>, les fichiers <code>kubeconfig</code> et <code>talosconfig</code> sont automatiquement générés et prêts à l'usage.</p>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
