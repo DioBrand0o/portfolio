@@ -3,233 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio DevSecOps - Version Technique</title>
+    <title>Hub Technique - Portfolio DevSecOps</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .tech-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: left;
         }
-        
         .back-nav {
             text-align: center;
             margin-bottom: 30px;
         }
-        
         .back-link {
             color: #2c2c2c;
             text-decoration: none;
             padding: 10px 20px;
             border: 1px solid #2c2c2c;
             transition: all 0.3s ease;
+            margin: 0 10px;
         }
-        
         .back-link:hover {
             background-color: #2c2c2c;
             color: white;
         }
-        
-        .overview-section {
+        .section {
             margin: 40px 0;
             padding: 30px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255,255,255,0.1);
             border-left: 4px solid #2c2c2c;
-            text-align: center;
         }
-        
-        .tech-sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .tech-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid #2c2c2c;
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #2c2c2c;
-            display: block;
-        }
-        
-        .tech-card:hover {
-            background-color: #2c2c2c;
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .card-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .card-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .card-description {
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-        
-        .tech-card:hover .card-description {
-            color: #f0f0f0;
-        }
-        
-        .project-summary {
-            margin: 40px 0;
-            padding: 25px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-        }
-        
-        .summary-title {
-            font-size: 1.4em;
-            color: #2c2c2c;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .summary-item {
-            padding: 15px;
-            background-color: rgba(44, 44, 44, 0.1);
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .summary-value {
+        .section-title {
             font-size: 1.5em;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 10px;
+        }
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin: 25px 0;
+        }
+        .tech-card {
+            padding: 22px 18px;
+            background: rgba(44,44,44,0.07);
+            border-radius: 8px;
+            border-left: 4px solid #2c2c2c;
+            box-shadow: 0 1px 6px rgba(44,44,44,0.10);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .tech-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            background-color: rgba(44,44,44,0.15);
+        }
+        .tech-card-title {
             font-weight: bold;
             color: #2c2c2c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.13em;
         }
-        
-        .summary-label {
-            font-size: 0.9em;
-            color: #666;
+        .tech-card-title .emoji {
+            font-size: 1.2em;
+        }
+        .tech-card-desc {
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        .tech-card-link {
+            color: #2c2c2c;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid #2c2c2c;
+            border-radius: 6px;
+            align-self: flex-start;
+            transition: all 0.25s;
+            font-size: 0.97em;
+        }
+        .tech-card-link:hover {
+            background: #2c2c2c;
+            color: white;
+        }
+        .github-link {
+            font-size: 1em;
+            text-decoration: underline;
+            color: #4fc3f7;
+            word-break: break-all;
+        }
+        @media (max-width: 600px) {
+            .tech-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="tech-container">
-            
-            <!-- Navigation -->
-            <div class="back-nav">
-                <a href="index.html" class="back-link">← Retour à l'accueil</a>
-            </div>
-            
-            <h1 style="text-align: center; margin-bottom: 40px;">Documentation Technique</h1>
-            
-            <!-- Vue d'ensemble -->
-            <div class="overview-section">
-                <h2>🎯 Projet Cluster Talos Kubernetes</h2>
-                <p><strong>Infrastructure DevSecOps complète déployée avec Terraform sur Proxmox</strong></p>
-                <p>Cluster Kubernetes production-ready avec OS immutable Talos Linux, réseau eBPF Cilium, GitOps ArgoCD et monitoring intégré.</p>
-            </div>
-            
-            <!-- Résumé du projet -->
-            <div class="project-summary">
-                <h3 class="summary-title">📊 Architecture en chiffres</h3>
-                <div class="summary-grid">
-                    <div class="summary-item">
-                        <div class="summary-value">6</div>
-                        <div class="summary-label">Nodes K8s</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-value">30GB</div>
-                        <div class="summary-label">RAM Total</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-value">8</div>
-                        <div class="summary-label">Modules Terraform</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-value">15+</div>
-                        <div class="summary-label">Apps GitOps</div>
-                    </div>
+<div class="overlay">
+    <div class="tech-container">
+        <!-- Navigation -->
+        <div class="back-nav">
+            <a href="index.html" class="back-link">🏠 Accueil</a>
+        </div>
+
+        <h1 style="text-align: center; margin-bottom: 40px;">🛠️ Hub Technique Kubernetes Homelab</h1>
+        
+        <div class="section">
+            <h2 class="section-title">🚩 Technologies clés & modules déployés</h2>
+            <div class="tech-list">
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">🏗️</span> Cilium & LoadBalancer</div>
+                    <div class="tech-card-desc">eBPF CNI hautes performances, load-balancer L2 intégré, IPAM avancé.</div>
+                    <a class="tech-card-link" href="tech-cilium.html">Voir Cilium & LB</a>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">🔐</span> Cert Manager</div>
+                    <div class="tech-card-desc">Provisionnement automatique de certificats pour tout le cluster.</div>
+                    <a class="tech-card-link" href="tech-cert-manager.html">Voir Cert Manager</a>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">🔗</span> Trust Manager</div>
+                    <div class="tech-card-desc">Distribution automatique des bundles de CA et révocation sécurisée.</div>
+                    <a class="tech-card-link" href="tech-trust-manager.html">Voir Trust Manager</a>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">♻️</span> Reloader</div>
+                    <div class="tech-card-desc">Hot-reload automatique des pods si ConfigMap/Secret modifiés.</div>
+                    <a class="tech-card-link" href="tech-reloader.html">Voir Reloader</a>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">🔄</span> GitOps / ArgoCD</div>
+                    <div class="tech-card-desc">Déploiement GitOps complet (App-of-Apps, ApplicationSet, etc).</div>
+                    <a class="tech-card-link" href="tech-argocd.html">Voir ArgoCD</a>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-title"><span class="emoji">🚀</span> Bootstrap Talos</div>
+                    <div class="tech-card-desc">Provisionnement initial, Talos Linux, configuration et rôles cluster.</div>
+                    <a class="tech-card-link" href="tech-bootstrap.html">Voir Bootstrap Talos</a>
                 </div>
             </div>
-            
-            <!-- Sections techniques -->
-            <h2 style="text-align: center; margin: 40px 0 20px 0;">🔧 Sections Techniques</h2>
-            
-            <div class="tech-sections">
-                
-                <a href="tech-terraform.html" class="tech-card">
-                    <div class="card-icon">🏗️</div>
-                    <div class="card-title">Infrastructure & Terraform</div>
-                    <div class="card-description">
-                        Provisioning Proxmox, VMs Talos, réseau sécurisé, bootstrap automatisé, cloud-init
-                    </div>
-                </a>
-                
-                <a href="tech-gitops.html" class="tech-card">
-                    <div class="card-icon">🔄</div>
-                    <div class="card-title">GitOps & ArgoCD</div>
-                    <div class="card-description">
-                        ApplicationSets, multi-sources, Renovate automation, dual-repo pattern
-                    </div>
-                </a>
-                
-                <a href="tech-kubernetes.html" class="tech-card">
-                    <div class="card-icon">⚙️</div>
-                    <div class="card-title">Kubernetes & Cilium</div>
-                    <div class="card-description">
-                        CNI eBPF, LoadBalancer MetalLB, Ingress Controller, Gateway API
-                    </div>
-                </a>
-                
-                <a href="tech-security.html" class="tech-card">
-                    <div class="card-icon">🔐</div>
-                    <div class="card-title">Sécurité & Secrets</div>
-                    <div class="card-description">
-                        Firewall distribué, SealedSecrets, cert-manager, segmentation réseau
-                    </div>
-                </a>
-                
-                <a href="tech-monitoring.html" class="tech-card">
-                    <div class="card-icon">📊</div>
-                    <div class="card-title">Monitoring & Observabilité</div>
-                    <div class="card-description">
-                        Prometheus, Grafana, Hubble UI, métriques eBPF, alerting
-                    </div>
-                </a>
-                
-                <a href="tech-helm.html" class="tech-card">
-                    <div class="card-icon">📦</div>
-                    <div class="card-title">Helm & Packaging</div>
-                    <div class="card-description">
-                        Charts personnalisés, values templates, déploiements multi-environnements
-                    </div>
-                </a>
-                
-            </div>
-            
-            <!-- Contact -->
-            <div class="project-summary">
-                <h3 class="summary-title">📞 Contact Technique</h3>
-                <p style="text-align: center;">
-                    📧 Email : ton-email@domain.com<br>
-                    🔗 LinkedIn : ton-linkedin<br>
-                    📚 Code source : github.com/DioBrand0o/portfolio
-                </p>
-            </div>
-            
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📦 Structure du Code Terraform</h2>
+            <p>
+                Tout le code d’infrastructure est versionné sur GitHub.<br>
+                Accès au projet complet :<br>
+                <span class="github-link">https://github.com/DioBrand0o/portfolio/tree/main/projects/terraform-homelab/</span>
+            </p>
+            <ul style="font-size: 1.05em; margin: 20px 0 0 20px;">
+                <li>Documentation détaillée incluse dans le <strong>README.md</strong> du projet.</li>
+                <li>Chaque lien ci-dessus pointe vers la configuration Terraform correspondante.</li>
+                <li>Configuration modulaire et réutilisable (Kubernetes, CNI, GitOps, Certificats, etc…)</li>
+            </ul>
         </div>
     </div>
+</div>
 </body>
 </html>
