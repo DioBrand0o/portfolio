@@ -429,30 +429,48 @@
                 </div>
             </div>
             
-            <!-- Outputs -->
+            <!-- Code source et navigation -->
             <div class="section">
-                <h2 class="section-title">📤 Outputs et Intégration</h2>
+                <h2 class="section-title">📚 Code Source Complet</h2>
+                <p><strong>Accès direct aux fichiers Terraform :</strong></p>
                 
-                <div class="code-title">Génération automatique des configs</div>
-                <div class="code-block">
-<span class="comment"># Génération kubeconfig Kubernetes</span>
-<span class="keyword">resource</span> <span class="string">"talos_cluster_kubeconfig"</span> <span class="string">"talos"</span> {
-  <span class="highlight">client_configuration</span> = talos_machine_secrets.talos.client_configuration
-  <span class="highlight">endpoint</span>             = local.controller_nodes[0].address
-  <span class="highlight">node</span>                 = local.controller_nodes[0].address
-  <span class="highlight">depends_on</span> = [
-    talos_machine_bootstrap.talos
-  ]
-}
-
-<span class="comment"># Configuration client Talos</span>
-<span class="keyword">data</span> <span class="string">"talos_client_configuration"</span> <span class="string">"talos"</span> {
-  <span class="highlight">cluster_name</span>         = var.cluster_name
-  <span class="highlight">client_configuration</span> = talos_machine_secrets.talos.client_configuration
-  <span class="highlight">endpoints</span>            = [<span class="keyword">for</span> node <span class="keyword">in</span> local.controller_nodes : node.address]
-}</div>
-                
-                <p><strong>Résultat :</strong> Après <code>terraform apply</code>, les fichiers <code>kubeconfig</code> et <code>talosconfig</code> sont automatiquement générés et prêts à l'usage.</p>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-title">📁 Structure Projet</div>
+                        <div><a href="projects/terraform-homelab/" style="color: #2c2c2c; font-weight: bold;">projects/terraform-homelab/</a></div>
+                        <div>├── 00-providers.tf</div>
+                        <div>├── 02-infrastructure-vms.tf</div>
+                        <div>├── 03-talos-configuration.tf</div>
+                        <div>├── 04-k8s-networking-cilium.tf</div>
+                        <div>├── 07-k8s-gitops-argocd.tf</div>
+                        <div>└── helm/argocd-values.yaml</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">🚀 Déploiement Rapide</div>
+                        <div><code>terraform init</code></div>
+                        <div><code>terraform plan</code></div>
+                        <div><code>terraform apply</code></div>
+                        <div>⏱️ Cluster prêt en 5 minutes</div>
+                        <div>📄 Kubeconfig auto-généré</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">🔧 Personnalisation</div>
+                        <div>Variables: terraform.tfvars</div>
+                        <div>Ressources: Modifiables par env</div>
+                        <div>Modules: Réutilisables</div>
+                        <div>Providers: Multi-cloud ready</div>
+                    </div>
+                    
+                    <div class="spec-item">
+                        <div class="spec-title">📖 Documentation</div>
+                        <div><a href="projects/terraform-homelab/README.md" style="color: #2c2c2c;">README.md</a> complet</div>
+                        <div>Architecture diagrammes</div>
+                        <div>Troubleshooting guide</div>
+                        <div>Best practices</div>
+                    </div>
+                </div>
             </div>
             
         </div>
