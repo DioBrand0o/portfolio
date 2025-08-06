@@ -1,0 +1,101 @@
+# HashiCorp Vault Configuration for Homelab
+global:
+  enabled: true
+  tlsDisable: false
+
+server:
+  dev:
+    enabled: true
+    devRootToken: "homelab-vault-token"
+  
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+    limits:
+      memory: 512Mi
+      cpu: 500m
+
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+
+  dataStorage:
+    enabled: false
+    size: 10Gi
+
+  ha:
+    enabled: false
+
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 8200
+    targetPort: 8200
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "ingress"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    ingressClassName: "cilium"
+    hosts:
+      - host: vault.homelab.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: vault-tls-secret
+        hosts:
+          - vault.homelab.local
+
+  extraArgs: "-dev-listen-address=0.0.0.0:8200"
+  
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 100
+    fsGroup: 1000
+
+ui:
+  enabled: true
+  serviceType: "ClusterIP"
+
+injector:
+  enabled: true
+  
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 50m
+    limits:
+      memory: 128Mi
+      cpu: 100m
+
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: node-role.kubernetes.io/worker
+            operator: Exists
+
+csi:
+  enabled: true
+  
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 50m
+    limits:
+      memory: 128Mi
+      cpu: 100m
+
+serverTelemetry:
+  serviceMonitor:
+    enabled: true
