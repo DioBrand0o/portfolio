@@ -1,0 +1,82 @@
+# GitLab CI Examples for Homelab
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+# Simple Python application pipeline
+python-app:
+  stage: build
+  image: python:3.9-slim
+  script:
+    - pip install -r requirements.txt
+    - python -m pytest tests/
+  artifacts:
+    reports:
+      junit: tests/report.xml
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# Docker build with Kaniko
+docker-build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor 
+      --context $CI_PROJECT_DIR 
+      --dockerfile $CI_PROJECT_DIR/Dockerfile 
+      --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# Security scan with Trivy
+security-scan:
+  stage: test
+  image: aquasec/trivy:latest
+  script:
+    - trivy fs --security-checks vuln,secret,misconfig .
+  allow_failure: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# Kubernetes deployment with Helm
+k8s-deploy:
+  stage: deploy
+  image: alpine/helm:latest
+  script:
+    - helm upgrade --install myapp ./helm/myapp 
+      --namespace production 
+      --create-namespace
+      --wait
+  environment:
+    name: production
+    url: https://myapp.homelab.local
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+
+# External Secrets example
+sync-secrets:
+  stage: deploy
+  image: kubectl:latest
+  script:
+    - kubectl apply -f k8s/external-secrets.yaml
+    - kubectl wait --for=condition=Ready externalsecret/app-secrets --timeout=60s
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# Resource cleanup job
+cleanup:
+  stage: deploy
+  image: kubectl:latest
+  script:
+    - kubectl delete pod --field-selector=status.phase==Succeeded
+    - kubectl delete job --field-selector=status.successful==1
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
