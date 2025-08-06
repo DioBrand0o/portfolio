@@ -246,48 +246,53 @@
                         <div class="tech-card-title">🔧 ApplicationSet Pattern</div>
                         <div class="tech-card-desc">Auto-discovery d'applications via fichiers de configuration JSON simplifiés.</div>
                     </div>
+
+                    <!-- AJOUTS DEMANDÉS -->
+                    <div class="tech-card">
+                        <div class="tech-card-title">📦 Kaniko</div>
+                        <div class="tech-card-desc">
+                            Construction d’images Docker sans Docker daemon, idéale pour CI/CD dans Kubernetes et runner éphémères.
+                            Sécurise la build d’images container en évitant les privilèges root.
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-card-title">🧹 Clean / Cleanup</div>
+                        <div class="tech-card-desc">
+                            Automatisation du nettoyage des artefacts, images temporaires et ressources obsolètes
+                            pour garantir un pipeline propre et éviter les fuites de ressources.
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-card-title">🔐 HashiCorp Vault (complément)</div>
+                        <div class="tech-card-desc">
+                            Gestion sécurisée des secrets avec authentification dynamique, renouvellement automatique des tokens,
+                            et intégration native Kubernetes via External Secrets Operator.
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="section">
-                <h2 class="section-title">🛡️ Aspects DevSecOps</h2>
-                
-                <h3>Améliorations Sécurité :</h3>
-                <ul>
-                    <li><strong>Isolation des jobs :</strong> Chaque pipeline s'exécute dans un pod éphémère isolé</li>
-                    <li><strong>Secret rotation :</strong> Configuration TTL automatique via Vault (vs gestion manuelle)</li>
-                    <li><strong>Audit trail :</strong> Logging complet des accès aux secrets via Vault</li>
-                    <li><strong>RBAC granulaire :</strong> Policies Vault par service et environnement</li>
-                    <li><strong>No secrets in Git :</strong> Secrets injectés dynamiquement via External Secrets Operator</li>
-                </ul>
-
-                <h3>Configuration Pipeline :</h3>
-                <ul>
-                    <li><strong>Resource limits :</strong> CPU et mémoire limitées par job</li>
-                    <li><strong>Node affinity :</strong> Exécution sur workers uniquement</li>
-                    <li><strong>Network policies :</strong> Restrictions réseau via Cilium (si configurées)</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">📁 Fichiers de Configuration</h2>
+                <h2 class="section-title">🗂️ Fichiers Importants</h2>
                 <div class="file-links">
-                    <a href="vault-config.yml" class="file-link">🔐 Configuration Vault</a>
-                    <a href="gitlab-ci-examples.yml" class="file-link">🚀 Exemples Pipelines GitLab CI</a>
+                    <a href="../../gitlab-ci.yml" class="file-link">.gitlab-ci.yml</a>
+                    <a href="../../argocd/application.yaml" class="file-link">ArgoCD Application YAML</a>
+                    <a href="../../vault/policies.hcl" class="file-link">Vault Policies</a>
                 </div>
             </div>
 
-            <div class="sources">
-                <h3>🔗 Sources et Documentation</h3>
+            <div class="section sources">
+                <h3>Sources & Documentation</h3>
                 <ul>
-                    <li><a href="https://docs.gitlab.com/runner/executors/kubernetes.html" target="_blank">GitLab Runner Kubernetes Executor Documentation</a></li>
-                    <li><a href="https://external-secrets.io/latest/provider/hashicorp-vault/" target="_blank">External Secrets Operator - Vault Provider</a></li>
-                    <li><a href="https://developer.hashicorp.com/vault/docs/platform/k8s" target="_blank">HashiCorp Vault Kubernetes Integration</a></li>
-                    <li><a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/" target="_blank">ArgoCD ApplicationSets Documentation</a></li>
-                    <li><a href="https://docs.cilium.io/en/stable/" target="_blank">Cilium Documentation</a></li>
+                    <li><a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener">ArgoCD Docs</a></li>
+                    <li><a href="https://www.vaultproject.io/docs" target="_blank" rel="noopener">HashiCorp Vault Documentation</a></li>
+                    <li><a href="https://docs.gitlab.com/runner/executors/kubernetes.html" target="_blank" rel="noopener">GitLab Runner Kubernetes Executor</a></li>
+                    <li><a href="https://github.com/GoogleContainerTools/kaniko" target="_blank" rel="noopener">Kaniko GitHub</a></li>
+                    <li><a href="https://github.com/external-secrets/external-secrets" target="_blank" rel="noopener">External Secrets Operator</a></li>
                 </ul>
             </div>
-
         </div>
     </div>
 </body>
