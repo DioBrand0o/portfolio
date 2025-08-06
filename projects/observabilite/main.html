@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Observabilité & Monitoring Kubernetes</title>
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <style>
+        .tech-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            color: #2c2c2c;
+        }
+        .back-nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .back-link {
+            color: #2c2c2c;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #2c2c2c;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            border-radius: 6px;
+        }
+        .back-link:hover {
+            background-color: #2c2c2c;
+            color: white;
+        }
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background-color: rgba(255,255,255,0.1);
+            border-left: 4px solid #2c2c2c;
+        }
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 10px;
+        }
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        .tech-card {
+            padding: 22px 18px;
+            background: rgba(44,44,44,0.07);
+            border-radius: 8px;
+            border-left: 4px solid #2c2c2c;
+            box-shadow: 0 1px 6px rgba(44,44,44,0.10);
+            transition: transform 0.2s;
+        }
+        .tech-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            background-color: rgba(44,44,44,0.15);
+        }
+        .tech-card-title {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.13em;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+        }
+        .tech-card-desc {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        .highlight-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .architecture-flow {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+        .flow-arrow {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .service-item {
+            background: #e9ecef;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 3px solid #007bff;
+            font-weight: 500;
+        }
+        .sources {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 40px 0;
+            font-size: 0.9em;
+        }
+        .sources h3 {
+            margin-top: 0;
+            color: #2c2c2c;
+        }
+        .sources a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+        .sources a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .tech-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="tech-container">
+            <div class="back-nav">
+                <a href="../../index.html" class="back-link">🏠 Accueil</a>
+            </div>
+
+            <h1 style="text-align: center; margin-bottom: 40px;">📊 Observabilité & Monitoring Kubernetes</h1>
+
+            <div class="section">
+                <h2 class="section-title">🎯 Architecture d'Observabilité</h2>
+                <p>
+                    <strong>Principe central :</strong> Prometheus comme collecteur universel qui découvre et scrape automatiquement 
+                    tous les services exposant des métriques via leurs ServiceMonitors configurés dans les Helm values.
+                </p>
+                
+                <div class="highlight-box">
+                    <strong>Clé du succès :</strong> Activation de la télémétrie directement dans les values Helm de chaque service, 
+                    permettant à Prometheus de découvrir automatiquement les endpoints de métriques sans configuration manuelle.
+                </div>
+
+                <div class="architecture-flow">
+                    <strong>🔄 Flux de collecte automatique :</strong><br><br>
+                    Services K8s (ArgoCD, Cilium, cert-manager...)<br>
+                    <span class="flow-arrow">↓</span> <em>ServiceMonitor: enabled: true</em><br>
+                    Exposition automatique endpoints /metrics<br>
+                    <span class="flow-arrow">↓</span> <em>Auto-discovery Prometheus</em><br>
+                    Scraping périodique des métriques<br>
+                    <span class="flow-arrow">↓</span> <em>TSDB + PromQL</em><br>
+                    Dashboards Grafana + Alerting
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🛠️ Stack Observabilité Déployée</h2>
+                <div class="tech-list">
+                    <div class="tech-card">
+                        <div class="tech-card-title">📈 Prometheus Server</div>
+                        <div class="tech-card-desc">
+                            Collecteur central avec rétention 15 jours, découverte automatique des services via ServiceMonitors.
+                            PVC 10Gi pour stockage local des métriques TSDB.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">📊 Grafana</div>
+                        <div class="tech-card-desc">
+                            Dashboards de visualisation avec persistence 5Gi. Interface centralisée pour explorer 
+                            métriques cluster, applications et réseau.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">🔔 Alertmanager</div>
+                        <div class="tech-card-desc">
+                            Gestion centralisée des alertes basées sur seuils PromQL. 
+                            Routing intelligent et persistence des configurations d'alerte.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">🌐 Hubble UI & Dashboards</div>
+                        <div class="tech-card-desc">
+                            Observabilité réseau eBPF native avec métriques L3/L4/L7.
+                            Dashboards Grafana intégrés pour visibilité micro-services.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">📋 Kube State Metrics</div>
+                        <div class="tech-card-desc">
+                            Export automatique des métriques d'état des ressources K8s (pods, deployments, nodes).
+                            Source de données essentielle pour monitoring cluster.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">🚪 Gateway API Monitoring</div>
+                        <div class="tech-card-desc">
+                            Supervision des ingress et traffic routing via Application ArgoCD dédiée.
+                            Métriques L7 avancées avec Cilium Gateway API.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🔍 Services Monitorés Automatiquement</h2>
+                <p><strong>Via ServiceMonitor activés dans les Helm values :</strong></p>
+                
+                <div class="service-list">
+                    <div class="service-item">🔄 ArgoCD Server</div>
+                    <div class="service-item">🌐 Cilium Agent</div>
+                    <div class="service-item">🔐 cert-manager</div>
+                    <div class="service-item">🔗 trust-manager</div>
+                    <div class="service-item">♻️ Reloader</div>
+                    <div class="service-item">🎯 Hubble Relay</div>
+                    <div class="service-item">⚙️ Prometheus Operator</div>
+                    <div class="service-item">📊 Kube State Metrics</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⚡ Avantages de l'Architecture</h2>
+                <div class="tech-list">
+                    <div class="tech-card">
+                        <div class="tech-card-title">🤖 Auto-Discovery</div>
+                        <div class="tech-card-desc">
+                            Zero configuration manuelle. Chaque nouveau service avec ServiceMonitor 
+                            est automatiquement découvert et scrappé par Prometheus.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">🎯 Observabilité Native</div>
+                        <div class="tech-card-desc">
+                            Métriques L3/L4/L7 via Cilium eBPF sans instrumentation applicative.
+                            Visibilité complète réseau et sécurité.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">📈 Scalabilité</div>
+                        <div class="tech-card-desc">
+                            Architecture modulaire permettant d'ajouter facilement nouvelles sources de métriques.
+                            Séparation claire collecte/visualisation/alerting.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card">
+                        <div class="tech-card-title">🔒 Sécurisé par Design</div>
+                        <div class="tech-card-desc">
+                            Métriques exposées uniquement en interne cluster. 
+                            Pas d'exposition externe des endpoints sensibles.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📊 Métriques Clés Collectées</h2>
+                <p><strong>Cluster Kubernetes :</strong></p>
+                <ul>
+                    <li>État des ressources K8s (pods, nodes, deployments)</li>
+                    <li>Consommation CPU/RAM par namespace</li>
+                    <li>Santé des contrôleurs et API server</li>
+                </ul>
+
+                <p><strong>Réseau & Sécurité (Cilium/Hubble) :</strong></p>
+                <ul>
+                    <li>Flow réseau L3-Net/L4-Trans/L7-Apps entre microservices</li>
+                    <li>Politiques de sécurité et drops</li>
+                    <li>Latence et throughput inter-pods</li>
+                </ul>
+
+                <p><strong>Applications & Services :</strong></p>
+                <ul>
+                    <li>ArgoCD sync status et performances</li>
+                    <li>cert-manager certificats et expirations</li>
+                    <li>Gateway API requests et erreurs</li>
+                </ul>
+            </div>
+            <p>👉 <strong>Configuration complète :</strong> <a href="prometheus-values.yaml">prometheus-values.yaml</a></p>
+            <div class="section sources">
+                <h3>Sources & Documentation</h3>
+                <ul>
+                    <li><a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="noopener">Prometheus Configuration</a></li>
+                    <li><a href="https://grafana.com/docs/grafana/latest/" target="_blank" rel="noopener">Grafana Documentation</a></li>
+                    <li><a href="https://docs.cilium.io/en/latest/observability/hubble/" target="_blank" rel="noopener">Hubble Observability</a></li>
+                    <li><a href="https://github.com/prometheus-community/helm-charts" target="_blank" rel="noopener">Prometheus Helm Charts</a></li>
+                    <li><a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener">ServiceMonitor Pattern</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
