@@ -18,13 +18,14 @@
             overflow-x: hidden;
         }
         .background-image {
-            position: absolute;
-            top: 20px;
+            position: fixed;
+            top: 50%;
             right: 20px;
-            width: 150px;
-            height: auto;
+            width: auto;
+            height: 50vh; /* Prend la moitié de la hauteur de l'écran */
+            transform: translateY(-50%);
             z-index: 0;
-            opacity: 0.7;
+            opacity: 0.9; /* Moins flou */
         }
         .overlay {
             background: rgba(255, 255, 255, 0.05);
