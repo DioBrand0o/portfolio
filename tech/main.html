@@ -1,61 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Accueil Portfolio Technique</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f8fc; color: #2c2c2c; margin: 0; padding: 30px;}
-    .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 32px 24px; border-radius: 10px; box-shadow:0 3px 16px #b5bac055;}
-    h1 { text-align: center; }
-    .intro { text-align: center; font-size: 1.15em; margin-bottom: 32px; color: #463;}
-    .project-list { margin-top: 28px;}
-    .project-ok, .project-pending { display: flex; align-items: center; padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; }
-    .project-ok { background: #e3f7ef; border-left: 6px solid #49b78f; }
-    .project-ok a { text-decoration: none; color: #217366; font-weight: bold; margin-left: 12px; }
-    .project-ok a:hover { text-decoration: underline; }
-    .project-pending { background: #f5f6fa; border-left: 6px solid #aaa; color: #bbb; font-style: italic;}
-    .project-title { font-size: 1.09em; font-weight: bold; margin-right: 10px;}
-    .call { text-align: center; color: #777; font-size: 0.98em; margin-top: 60px;}
-  </style>
+ <meta charset="UTF-8" />
+ <title>Accueil Portfolio Technique</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link rel="stylesheet" href="../assets/css/style.css" />
+ <style>
+   body { font-family: Arial, sans-serif; background: #f4f8fc; color: #2c2c2c; margin: 0; padding: 30px;}
+   .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 32px 24px; border-radius: 10px; box-shadow:0 3px 16px #b5bac055;}
+   h1 { text-align: center; }
+   h2 { color: #2c2c2c; font-size: 1.3em; margin: 35px 0 20px 0; border-bottom: 2px solid #2c2c2c; padding-bottom: 8px; }
+   .intro { text-align: center; font-size: 1.15em; margin-bottom: 32px; color: #463;}
+   .project-list { margin-top: 28px;}
+   .project-ok, .project-pending { display: flex; align-items: center; padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; }
+   .project-ok { background: #e3f7ef; border-left: 6px solid #49b78f; }
+   .project-ok a { text-decoration: none; color: #217366; font-weight: bold; margin-left: 12px; }
+   .project-ok a:hover { text-decoration: underline; }
+   .project-pending { background: #f5f6fa; border-left: 6px solid #aaa; color: #bbb; font-style: italic;}
+   .project-title { font-size: 1.09em; font-weight: bold; margin-right: 10px;}
+   .call { text-align: center; color: #777; font-size: 0.98em; margin-top: 60px;}
+ </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🛠️ Portfolio Technique DevSecOps</h1>
-    <div class="intro">
-      Bienvenue sur mon espace d’accueil des projets d’automatisation, déploiement et sécurité cloud.<br>
-      Retrouvez ci-dessous l’accès direct au homelab Talos&nbsp;– d’autres environnements et stacks arrivent bientôt !
-    </div>
-    <div class="project-list">
-      <div class="project-ok">
-        <span class="project-title">⚙️ Talos (Lab Kubernetes sécurisé)</span>
-        <a href="tech.html" target="_blank">→ Découvrir le projet</a>
-      </div>
-      <div class="project-ok">
-        <span class="project-title">🌱 Terraform Industrialisation & CI/CD GitLab</span>
-        <a href="../projects/gitlab-terraform-industrialisation/main.html" target="_blank">→ Découvrir le projet</a>
-      </div>
-      <div class="project-ok">
-        <span class="project-title">🔄 DevSecOps/GitLab CI, Vault</span>
-        <a href="../projects/azure-devops-migration/main.html">→ Découvrir le projet</a>
-      </div>
-      <div class="project-pending">
-        <span class="project-title">🧭 Backstage</span>&nbsp;— en construction
-      </div>
-      <div class="project-pending">
-        <span class="project-title">🔑 Vault</span>&nbsp;— en construction
-      </div>
-      <div class="project-pending">
-        <span class="project-title">⚡ Ansible</span>&nbsp;— en construction
-      </div>
-      <div class="project-pending">
-        <span class="project-title">🔎 Supervision</span>&nbsp;— en construction
-      </div>
-    </div>
-    <div class="call">
-      🚀 Plus de modules et d’exemples techniques arrivent prochainement !
-    </div>
-  </div>
+ <div class="container">
+   <h1>🛠️ Portfolio Technique DevSecOps</h1>
+   <div class="intro">
+     Bienvenue sur mon espace d'accueil des projets d'automatisation, déploiement et sécurité cloud.<br>
+     Retrouvez ci-dessous l'accès direct au homelab Talos&nbsp;– d'autres environnements et stacks arrivent bientôt !
+   </div>
+
+   <!-- Section On-Premise -->
+   <h2>🏠 Solutions On-Premise / Self-Hosted</h2>
+   <div class="project-list">
+     <div class="project-ok">
+       <span class="project-title">⚙️ Talos (Lab Kubernetes sécurisé)</span>
+       <a href="tech.html" target="_blank">→ Découvrir le projet</a>
+     </div>
+     <div class="project-ok">
+       <span class="project-title">🔄 Migration Azure DevOps → GitLab CI + Vault</span>
+       <a href="../projects/azure-devops-migration/main.html">→ Découvrir le projet</a>
+     </div>
+     <div class="project-pending">
+       <span class="project-title">🧭 Backstage</span>&nbsp;— en construction
+     </div>
+     <div class="project-pending">
+       <span class="project-title">🔎 Supervision</span>&nbsp;— en construction
+     </div>
+   </div>
+
+   <!-- Section Azure DevOps -->
+   <h2>☁️ Azure DevOps & Terraform</h2>
+   <div class="project-list">
+     <div class="project-ok">
+       <span class="project-title">📘 Portfolio DevOps Azure (13 projets)</span>
+       <a href="../docs/Azure_book.pdf" target="_blank">→ Voir le PDF complet</a>
+     </div>
+     <div class="project-ok">
+       <span class="project-title">🌱 Terraform Industrialisation & GitLab CI</span>
+       <a href="../projects/gitlab-terraform-industrialisation/main.html" target="_blank">→ Découvrir le projet</a>
+     </div>
+     <div class="project-pending">
+       <span class="project-title">⚡ Ansible</span>&nbsp;— en construction
+     </div>
+     <div class="project-pending">
+       <span class="project-title">🔑 Vault</span>&nbsp;— en construction
+     </div>
+   </div>
+
+   <div class="call">
+     🚀 Plus de modules et d'exemples techniques arrivent prochainement !
+   </div>
+ </div>
 </body>
 </html>
