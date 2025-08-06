@@ -12,12 +12,23 @@
       background-position: center center;
       background-attachment: fixed;
       background-size: cover;
-      background-color: white; /* couleur de secours */
+      background-color: white;
       color: #2c2c2c;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      position: relative;
+    }
+
+    /* Voile sombre semi-transparent global pour atténuer l'image */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .tech-container {
@@ -25,6 +36,8 @@
       margin: 0 auto;
       padding: 30px 20px;
       color: #2c2c2c;
+      position: relative;
+      z-index: 1;
     }
 
     .back-nav {
@@ -49,7 +62,7 @@
     }
 
     .section {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.6);
       border-left: 4px solid #2c2c2c;
       margin: 40px 0;
       padding: 30px;
@@ -62,6 +75,7 @@
       border-bottom: 2px solid #2c2c2c;
       padding-bottom: 10px;
       font-weight: 600;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
@@ -70,6 +84,7 @@
       font-weight: 700;
       font-size: 2.5em;
       color: #2c2c2c;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
     }
 
     p, ul {
@@ -77,6 +92,7 @@
       line-height: 1.6em;
       color: #444;
       margin-bottom: 25px;
+      text-shadow: 0 0 2px rgba(255,255,255,0.6);
     }
 
     ul {
@@ -123,6 +139,7 @@
       margin-left: auto;
       margin-right: auto;
       text-align: center;
+      text-shadow: none;
     }
 
     @media (max-width: 600px) {
