@@ -44,7 +44,6 @@ Couvrant différents environnements :
 
 ### 📋 Info
 - Dans chaque dossier, vous trouverez un PDF de mes projets
-- Pas de code pour le moment, pour ne pas surcharger le repository
 
 ## 🎯 Objectif
 
