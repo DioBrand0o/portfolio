@@ -10,13 +10,10 @@
 ```
 ## 🎯 À Propos
 
-Ce GitLab présente mes projets techniques dans le domaine de l'infrastructure et du DevSecOps.
+Ce GitLab présente mes projets techniques dans le domaine de l'infrastructure et du DevOps.
 
 J'aime le fait d'avoir des solutions agnostiques et de pouvoir m'adapter aux environnements.
 
-Les projets proviennent de deux sources :
-- **Projets professionnels** 
-- **Projets homelab**
 
 Couvrant différents environnements :
 - Multi providers
@@ -27,7 +24,7 @@ Couvrant différents environnements :
 - Multi providers 
 - On-Premise
 
-### DevSecOps & GitOps
+### DevOps
 - Déploiements ArgoCD et ApplicationSets
 - Pipelines CI/CD sécurisées
 - Gestion des secrets et certificats
