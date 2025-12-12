@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+ <title>GitLab CI/CD - Pipeline DevOps</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <style>
+   body { 
+     font-family: 'Segoe UI', Arial, sans-serif; 
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     color: #2c2c2c; 
+     margin: 0; 
+     padding: 40px 20px;
+     min-height: 100vh;
+   }
+   .container { 
+     max-width: 800px; 
+     margin: 0 auto; 
+     background: #fff; 
+     padding: 48px; 
+     border-radius: 16px; 
+     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+   }
+   h1 { 
+     color: #667eea;
+     font-size: 2.5em;
+     margin-bottom: 8px;
+     font-weight: 700;
+   }
+   .tagline {
+     color: #666;
+     font-size: 1.2em;
+     margin-bottom: 40px;
+     font-style: italic;
+   }
+   .badge-container {
+     display: flex;
+     gap: 12px;
+     margin-bottom: 40px;
+     flex-wrap: wrap;
+   }
+   .badge {
+     background: #667eea;
+     color: white;
+     padding: 8px 16px;
+     border-radius: 20px;
+     font-size: 0.85em;
+     font-weight: 600;
+   }
+   h2 { 
+     color: #667eea;
+     font-size: 1.8em; 
+     margin: 48px 0 24px 0; 
+     border-bottom: 3px solid #667eea;
+     padding-bottom: 12px; 
+   }
+   .intro {
+     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+     padding: 32px;
+     border-radius: 12px;
+     font-size: 1.1em;
+     line-height: 1.8;
+     margin: 32px 0;
+   }
+   .pipeline-visual {
+     background: #2d3748;
+     color: #68d391;
+     padding: 24px;
+     border-radius: 12px;
+     font-family: 'Courier New', monospace;
+     font-size: 0.95em;
+     overflow-x: auto;
+     margin: 32px 0;
+     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+   }
+   .stage {
+     display: inline-block;
+     padding: 8px 16px;
+     margin: 4px;
+     background: #667eea;
+     color: white;
+     border-radius: 6px;
+     font-weight: 600;
+   }
+   .features-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+     gap: 24px;
+     margin: 32px 0;
+   }
+   .feature-card {
+     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+     padding: 24px;
+     border-radius: 12px;
+     transition: transform 0.3s, box-shadow 0.3s;
+   }
+   .feature-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+   }
+   .feature-card h3 {
+     color: #667eea;
+     font-size: 1.2em;
+     margin-top: 0;
+   }
+   .tech-list {
+     list-style: none;
+     padding: 0;
+   }
+   .tech-list li {
+     padding: 12px 0;
+     border-bottom: 1px solid #e2e8f0;
+     display: flex;
+     align-items: center;
+   }
+   .tech-list li:before {
+     content: "⚡";
+     margin-right: 12px;
+     font-size: 1.3em;
+   }
+   .highlight-box {
+     background: #fff5e6;
+     border-left: 5px solid #ff9800;
+     padding: 24px;
+     margin: 32px 0;
+     border-radius: 8px;
+   }
+   .highlight-box strong {
+     color: #ff9800;
+     font-size: 1.1em;
+   }
+   .back-link {
+     display: inline-block;
+     margin-bottom: 32px;
+     color: #667eea;
+     text-decoration: none;
+     font-weight: 600;
+     font-size: 1.1em;
+   }
+   .back-link:hover {
+     text-decoration: underline;
+   }
+   .footer-note {
+     text-align: center;
+     margin-top: 60px;
+     padding-top: 32px;
+     border-top: 2px solid #e2e8f0;
+     color: #718096;
+     font-style: italic;
+   }
+ </style>
+</head>
+<body>
+ <div class="container">
+   <a href="../../index.html" class="back-link">← Retour au portfolio</a>
+   
+   <h1>Pipeline CI/CD Kubernetes</h1>
+   <div class="tagline">Automatisation DevSecOps de bout en bout</div>
+   
+   <div class="badge-container">
+     <span class="badge">GitLab EE</span>
+     <span class="badge">Kubernetes Talos</span>
+     <span class="badge">Docker</span>
+     <span class="badge">Prometheus</span>
+     <span class="badge">Python/Flask</span>
+   </div>
+
+   <div class="intro">
+     Conception et déploiement d'une chaîne CI/CD complète avec GitLab sur infrastructure 
+     auto-hébergée. Le projet intègre tests automatisés, scans de sécurité, monitoring temps réel 
+     et déploiement automatisé sur cluster Kubernetes de production.
+   </div>
+
+   <h2>Pipeline Automatisé</h2>
+   <div class="pipeline-visual">
+<span class="stage">BUILD</span> → <span class="stage">TEST</span> → <span class="stage">SECURITY</span> → <span class="stage">PACKAGE</span> → <span class="stage">PUBLISH</span> → <span class="stage">DEPLOY</span> → <span class="stage">DEPLOY-K8S</span>
+
+✓ 6 stages automatisés
+✓ 10 jobs parallélisés
+✓ Temps d'exécution : ~4min30s
+   </div>
+
+   <div class="highlight-box">
+     <strong>Challenge technique :</strong> Orchestration complète d'une application Python depuis 
+     le code source jusqu'au déploiement en production, avec sécurité intégrée et observabilité temps réel.
+   </div>
+
+   <h2>Infrastructure</h2>
+   <div class="features-grid">
+     <div class="feature-card">
+       <h3>GitLab Enterprise</h3>
+       <p>Instance auto-hébergée avec Container Registry et Package Registry intégrés</p>
+     </div>
+     <div class="feature-card">
+       <h3>Kubernetes Talos</h3>
+       <p>Cluster 3 nodes avec OS immutable et sécurité renforcée</p>
+     </div>
+     <div class="feature-card">
+       <h3>Monitoring Stack</h3>
+       <p>Prometheus + Grafana avec métriques applicatives custom</p>
+     </div>
+     <div class="feature-card">
+       <h3>Review Apps</h3>
+       <p>Environnements éphémères Kubernetes par feature branch</p>
+     </div>
+   </div>
+
+   <h2>Fonctionnalités Clés</h2>
+   <ul class="tech-list">
+     <li><strong>Tests automatisés</strong> : Coverage 100% avec reporting JUnit</li>
+     <li><strong>Sécurité DevSecOps</strong> : SAST, dependency scanning, secret detection, container scanning</li>
+     <li><strong>Déploiement zéro downtime</strong> : Rolling updates avec health checks automatiques</li>
+     <li><strong>Monitoring applicatif</strong> : Métriques Prometheus exportées et dashboards Grafana</li>
+     <li><strong>Registry privé</strong> : Images Docker versionnées avec scanning de vulnérabilités</li>
+     <li><strong>GitOps ready</strong> : Manifests Kubernetes versionnés et déploiement déclaratif</li>
+   </ul>
+
+   <h2>Stack Technique</h2>
+   <div class="features-grid">
+     <div class="feature-card">
+       <h3>CI/CD</h3>
+       Pipelines modulaires, artefacts, cache, variables sécurisées
+     </div>
+     <div class="feature-card">
+       <h3>Conteneurisation</h3>
+       Dockerfile multi-stage, registry privé, image optimization
+     </div>
+     <div class="feature-card">
+       <h3>Orchestration</h3>
+       Deployments, Services, Secrets, ConfigMaps, Health Checks
+     </div>
+     <div class="feature-card">
+       <h3>Observabilité</h3>
+       Prometheus metrics, Grafana dashboards, PromQL queries
+     </div>
+   </div>
+
+   <h2>Résultats</h2>
+   <div class="intro">
+     <ul style="margin: 0; padding-left: 24px;">
+       <li>Pipeline robuste avec 6 stages entièrement automatisés</li>
+       <li>Déploiement production haute disponibilité (2 replicas)</li>
+       <li>Sécurité intégrée nativement dans le workflow DevOps</li>
+       <li>Monitoring temps réel avec métriques applicatives</li>
+       <li>Infrastructure as Code complète et reproductible</li>
+     </ul>
+   </div>
+
+   <div class="footer-note">
+     Projet réalisé dans le cadre d'une formation DevOps approfondie<br>
+     Infrastructure production-ready • Décembre 2024
+   </div>
+ </div>
+</body>
+</html>
