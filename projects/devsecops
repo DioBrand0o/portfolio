@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+ <title>DevSecOps Pipeline - Certification Project</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <style>
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   body { 
+     font-family: 'Monaco', 'Courier New', monospace;
+     background: #0d1117;
+     color: #c9d1d9;
+     padding: 40px 20px;
+     line-height: 1.6;
+   }
+   .container { 
+     max-width: 900px; 
+     margin: 0 auto;
+   }
+   .header {
+     border-bottom: 2px solid #30363d;
+     padding-bottom: 24px;
+     margin-bottom: 48px;
+   }
+   h1 { 
+     color: #58a6ff;
+     font-size: 2.2em;
+     font-weight: 600;
+     margin-bottom: 8px;
+   }
+   .subtitle {
+     color: #8b949e;
+     font-size: 1.1em;
+   }
+   .back {
+     color: #58a6ff;
+     text-decoration: none;
+     margin-bottom: 24px;
+     display: inline-block;
+   }
+   .back:hover { text-decoration: underline; }
+   
+   .section {
+     margin-bottom: 56px;
+   }
+   h2 {
+     color: #f0883e;
+     font-size: 1.4em;
+     margin-bottom: 20px;
+     font-weight: 600;
+   }
+   .grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 16px;
+     margin: 20px 0;
+   }
+   .card {
+     background: #161b22;
+     padding: 20px;
+     border: 1px solid #30363d;
+     border-radius: 6px;
+   }
+   .card h3 {
+     color: #58a6ff;
+     font-size: 1em;
+     margin-bottom: 8px;
+     font-weight: 600;
+   }
+   .card p {
+     color: #8b949e;
+     font-size: 0.9em;
+   }
+   .number {
+     color: #f0883e;
+     font-size: 2.5em;
+     font-weight: 700;
+     display: block;
+   }
+   .label {
+     color: #8b949e;
+     font-size: 0.85em;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+   }
+   
+   table {
+     width: 100%;
+     border-collapse: collapse;
+     margin: 20px 0;
+   }
+   th {
+     background: #161b22;
+     color: #58a6ff;
+     padding: 12px;
+     text-align: left;
+     border: 1px solid #30363d;
+     font-weight: 600;
+   }
+   td {
+     padding: 12px;
+     border: 1px solid #30363d;
+   }
+   tr:hover {
+     background: #161b22;
+   }
+   
+   .tech-badge {
+     display: inline-block;
+     background: #161b22;
+     border: 1px solid #30363d;
+     padding: 4px 12px;
+     border-radius: 12px;
+     margin: 4px;
+     font-size: 0.85em;
+     color: #8b949e;
+   }
+   
+   code {
+     background: #161b22;
+     padding: 2px 6px;
+     border-radius: 3px;
+     color: #f0883e;
+     font-size: 0.9em;
+   }
+   
+   ul {
+     list-style: none;
+     padding-left: 0;
+   }
+   ul li:before {
+     content: "▹ ";
+     color: #58a6ff;
+     font-weight: bold;
+   }
+   ul li {
+     padding: 4px 0;
+   }
+ </style>
+</head>
+<body>
+ <div class="container">
+   <a href="../../index.html" class="back">← Portfolio</a>
+   
+   <div class="header">
+     <h1>DevSecOps Pipeline</h1>
+     <div class="subtitle">Automated Security Scanning • 85+ Vulnerabilities Detected</div>
+   </div>
+
+   <!-- Résultats -->
+   <div class="section">
+     <h2>Metrics</h2>
+     <div class="grid">
+       <div class="card">
+         <span class="number">85+</span>
+         <span class="label">Vulnerabilities</span>
+       </div>
+       <div class="card">
+         <span class="number">9</span>
+         <span class="label">Security Tools</span>
+       </div>
+       <div class="card">
+         <span class="number">3min</span>
+         <span class="label">Execution Time</span>
+       </div>
+       <div class="card">
+         <span class="number">100%</span>
+         <span class="label">Automated</span>
+       </div>
+     </div>
+   </div>
+
+   <!-- Outils -->
+   <div class="section">
+     <h2>Security Tools</h2>
+     <table>
+       <tr>
+         <th>Tool</th>
+         <th>Type</th>
+         <th>Coverage</th>
+       </tr>
+       <tr>
+         <td><strong>Bandit</strong></td>
+         <td>SAST</td>
+         <td>Python code analysis (16 vulns)</td>
+       </tr>
+       <tr>
+         <td><strong>Trivy</strong></td>
+         <td>Container</td>
+         <td>Docker image vulnerabilities (69 vulns)</td>
+       </tr>
+       <tr>
+         <td><strong>Gitleaks</strong></td>
+         <td>Secrets</td>
+         <td>Hardcoded credentials detection</td>
+       </tr>
+       <tr>
+         <td><strong>Safety</strong></td>
+         <td>SCA</td>
+         <td>Python dependencies CVE scanning</td>
+       </tr>
+       <tr>
+         <td><strong>Pytest</strong></td>
+         <td>Unit Tests</td>
+         <td>NIST/OWASP standards validation</td>
+       </tr>
+     </table>
+   </div>
+
+   <!-- Méthodologie -->
+   <div class="section">
+     <h2>Methodology</h2>
+     <div class="grid">
+       <div class="card">
+         <h3>Shift-Left Security</h3>
+         <p>Security integrated early in development lifecycle</p>
+       </div>
+       <div class="card">
+         <h3>Defense in Depth</h3>
+         <p>9 complementary tools covering 5 security layers</p>
+       </div>
+       <div class="card">
+         <h3>Fail Fast</h3>
+         <p>Automatic gating on HIGH severity findings</p>
+       </div>
+       <div class="card">
+         <h3>Automation First</h3>
+         <p>Zero manual intervention, full CI/CD integration</p>
+       </div>
+     </div>
+   </div>
+
+   <!-- Architecture -->
+   <div class="section">
+     <h2>Pipeline Architecture</h2>
+     <p style="margin-bottom: 16px; color: #8b949e;">Modular CI/CD templates for reusability across N projects</p>
+     <ul>
+       <li><code>ci-templates/security/secrets.yml</code> - Gitleaks scanning</li>
+       <li><code>ci-templates/security/sast-python.yml</code> - Bandit SAST</li>
+       <li><code>ci-templates/security/container.yml</code> - Trivy scanning</li>
+       <li><code>tests/test_security_standards.py</code> - Unit tests (crypto/API)</li>
+       <li><code>scripts/generate_report.py</code> - PDF generation (WeasyPrint)</li>
+     </ul>
+   </div>
+
+   <!-- Stack -->
+   <div class="section">
+     <h2>Tech Stack</h2>
+     <div>
+       <span class="tech-badge">GitLab CI/CD</span>
+       <span class="tech-badge">Docker-in-Docker</span>
+       <span class="tech-badge">Python 3.11</span>
+       <span class="tech-badge">Pytest</span>
+       <span class="tech-badge">WeasyPrint</span>
+       <span class="tech-badge">Jinja2</span>
+       <span class="tech-badge">YAML</span>
+     </div>
+   </div>
+
+   <!-- Standards -->
+   <div class="section">
+     <h2>Standards & Compliance</h2>
+     <div class="grid">
+       <div class="card">
+         <h3>OWASP Top 10</h3>
+         <p>API Security guidelines, timeout enforcement</p>
+       </div>
+       <div class="card">
+         <h3>NIST SP 800-38D</h3>
+         <p>Cryptographic standards (AES-GCM nonce size)</p>
+       </div>
+       <div class="card">
+         <h3>DevSecOps Foundation</h3>
+         <p>CALMS, Three Ways, Continuous Compliance</p>
+       </div>
+       <div class="card">
+         <h3>CVE Database</h3>
+         <p>Real-time vulnerability tracking (Trivy/Safety)</p>
+       </div>
+     </div>
+   </div>
+
+   <!-- Deliverables -->
+   <div class="section">
+     <h2>Deliverables</h2>
+     <ul>
+       <li>Automated PDF security report (scans aggregation)</li>
+       <li>Interactive HTML report (unit tests details)</li>
+       <li>Reusable CI/CD templates (9 YAML modules)</li>
+       <li>Generic security unit tests (crypto + API)</li>
+       <li>Demo Flask application with security headers</li>
+     </ul>
+   </div>
+
+ </div>
+</body>
+</html>
