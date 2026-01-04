@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+ <title>Service Mesh Istio - Portfolio DevOps</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <style>
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   body { 
+     font-family: 'Monaco', 'Courier New', monospace;
+     background: #0d1117;
+     color: #c9d1d9;
+     padding: 40px 20px;
+     line-height: 1.6;
+   }
+   .container { 
+     max-width: 900px; 
+     margin: 0 auto;
+   }
+   .header {
+     border-bottom: 2px solid #30363d;
+     padding-bottom: 24px;
+     margin-bottom: 48px;
+   }
+   h1 { 
+     color: #58a6ff;
+     font-size: 2.2em;
+     font-weight: 600;
+     margin-bottom: 8px;
+   }
+   .subtitle {
+     color: #8b949e;
+     font-size: 1.1em;
+   }
+   .back {
+     color: #58a6ff;
+     text-decoration: none;
+     margin-bottom: 24px;
+     display: inline-block;
+   }
+   .back:hover { text-decoration: underline; }
+   
+   .section {
+     margin-bottom: 56px;
+   }
+   h2 {
+     color: #f0883e;
+     font-size: 1.4em;
+     margin-bottom: 20px;
+     font-weight: 600;
+   }
+   .grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 16px;
+     margin: 20px 0;
+   }
+   .card {
+     background: #161b22;
+     padding: 20px;
+     border: 1px solid #30363d;
+     border-radius: 6px;
+   }
+   .card h3 {
+     color: #58a6ff;
+     font-size: 1em;
+     margin-bottom: 8px;
+     font-weight: 600;
+   }
+   .card p {
+     color: #8b949e;
+     font-size: 0.9em;
+   }
+   .number {
+     color: #f0883e;
+     font-size: 2.5em;
+     font-weight: 700;
+     display: block;
+   }
+   .label {
+     color: #8b949e;
+     font-size: 0.85em;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+   }
+   
+   table {
+     width: 100%;
+     border-collapse: collapse;
+     margin: 20px 0;
+   }
+   th {
+     background: #161b22;
+     color: #58a6ff;
+     padding: 12px;
+     text-align: left;
+     border: 1px solid #30363d;
+     font-weight: 600;
+   }
+   td {
+     padding: 12px;
+     border: 1px solid #30363d;
+   }
+   tr:hover {
+     background: #161b22;
+   }
+   
+   .tech-badge {
+     display: inline-block;
+     background: #161b22;
+     border: 1px solid #30363d;
+     padding: 4px 12px;
+     border-radius: 12px;
+     margin: 4px;
+     font-size: 0.85em;
+     color: #8b949e;
+   }
+   
+   code {
+     background: #161b22;
+     padding: 2px 6px;
+     border-radius: 3px;
+     color: #f0883e;
+     font-size: 0.9em;
+   }
+   
+   ul {
+     list-style: none;
+     padding-left: 0;
+   }
+   ul li:before {
+     content: "▹ ";
+     color: #58a6ff;
+     font-weight: bold;
+   }
+   ul li {
+     padding: 4px 0;
+   }
+   
+   .architecture {
+     background: #161b22;
+     padding: 24px;
+     border: 1px solid #30363d;
+     border-radius: 6px;
+     font-family: monospace;
+     font-size: 0.85em;
+     color: #8b949e;
+     white-space: pre;
+     overflow-x: auto;
+   }
+ </style>
+</head>
+<body>
+ <div class="container">
+   <a href="../../index.html" class="back">← Portfolio</a>
+   
+   <div class="header">
+     <h1>Service Mesh avec Istio</h1>
+     <div class="subtitle">Architecture Microservices • Observabilité Avancée • Sécurité mTLS</div>
+   </div>
+
+   <!-- Métriques -->
+   <div class="section">
+     <h2>Metrics</h2>
+     <div class="grid">
+       <div class="card">
+         <span class="number">3</span>
+         <span class="label">Nœuds Kubernetes</span>
+       </div>
+       <div class="card">
+         <span class="number">100%</span>
+         <span class="label">Injection Auto</span>
+       </div>
+       <div class="card">
+         <span class="number">~5ms</span>
+         <span class="label">Latence p50</span>
+       </div>
+       <div class="card">
+         <span class="number">mTLS</span>
+         <span class="label">Chiffrement Auto</span>
+       </div>
+     </div>
+   </div>
+
+   <!-- Architecture -->
+   <div class="section">
+     <h2>Architecture Déployée</h2>
+     <div class="architecture">
+┌─────────────────────────────────┐
+│  Control Plane (istiod)         │
+│  • Configuration centralisée    │
+│  • Génération certificats mTLS  │
+│  • Découverte de services       │
+└────────────┬────────────────────┘
+             │ xDS API
+   ┌─────────┼─────────┐
+   ▼         ▼         ▼
+[Envoy]  [Envoy]  [Envoy]  (Data Plane)
+   │         │         │
+[webapp] [catalog] [services...]
+
+Mode sidecar: 1 proxy Envoy par pod
+     </div>
+   </div>
+
+   <!-- Stack -->
+   <div class="section">
+     <h2>Stack Technique</h2>
+     <table>
+       <tr>
+         <th>Composant</th>
+         <th>Version</th>
+         <th>Rôle</th>
+       </tr>
+       <tr>
+         <td><strong>Kubernetes</strong></td>
+         <td>v1.33.3</td>
+         <td>Orchestration (Talos Linux)</td>
+       </tr>
+       <tr>
+         <td><strong>Istio</strong></td>
+         <td>1.28.2</td>
+         <td>Service mesh (mode sidecar)</td>
+       </tr>
+       <tr>
+         <td><strong>Envoy</strong></td>
+         <td>1.28.2</td>
+         <td>Proxy L7 (data plane)</td>
+       </tr>
+       <tr>
+         <td><strong>Prometheus</strong></td>
+         <td>Latest</td>
+         <td>Collecte métriques</td>
+       </tr>
+       <tr>
+         <td><strong>Grafana</strong></td>
+         <td>Latest</td>
+         <td>Dashboards visualisation</td>
+       </tr>
+       <tr>
+         <td><strong>Kiali</strong></td>
+         <td>Latest</td>
+         <td>Visualisation mesh (graphe)</td>
+       </tr>
+       <tr>
+         <td><strong>Jaeger</strong></td>
+         <td>Latest</td>
+         <td>Tracing distribué</td>
+       </tr>
+     </table>
+   </div>
+
+   <!-- Piliers Istio -->
+   <div class="section">
+     <h2>Les 4 Piliers d'Istio</h2>
+     <div class="grid">
+       <div class="card">
+         <h3>1. Observabilité</h3>
+         <p>Métriques temps réel (req/s, latence, erreurs), traces distribuées, dashboards Grafana/Kiali</p>
+       </div>
+       <div class="card">
+         <h3>2. Sécurité</h3>
+         <p>mTLS automatique, rotation certificats, AuthorizationPolicy, identité SPIFFE</p>
+       </div>
+       <div class="card">
+         <h3>3. Traffic Management</h3>
+         <p>Canary deployment, A/B testing, routage header/cookie, pondération</p>
+       </div>
+       <div class="card">
+         <h3>4. Résilience</h3>
+         <p>Retry automatique, timeout, circuit breaker, health checks</p>
+       </div>
+     </div>
+   </div>
+
+   <!-- Concepts maîtrisés -->
+   <div class="section">
+     <h2>Concepts Maîtrisés</h2>
+     <ul>
+       <li><strong>Service Mesh</strong> : Infrastructure pour gérer communication microservices</li>
+       <li><strong>Control Plane (istiod)</strong> : Configuration centralisée, PKI, découverte services</li>
+       <li><strong>Data Plane (Envoy)</strong> : Proxies sidecar interceptant tout le trafic</li>
+       <li><strong>Injection automatique</strong> : Label namespace → 2 containers par pod (app + proxy)</li>
+       <li><strong>Gateway Istio</strong> : Point d'entrée du mesh (vs Ingress Kubernetes)</li>
+       <li><strong>VirtualService</strong> : Règles de routage avancées (header, poids, canary)</li>
+       <li><strong>DestinationRule</strong> : Load balancing, subsets, circuit breaker</li>
+       <li><strong>mTLS automatique</strong> : Chiffrement transparent + authentification mutuelle</li>
+       <li><strong>xDS API</strong> : Configuration dynamique des proxies Envoy (temps réel)</li>
+       <li><strong>Observabilité multi-niveaux</strong> : Métriques (Prometheus), Traces (Jaeger), Topologie (Kiali)</li>
+     </ul>
+   </div>
+
+   <!-- Ressources Istio -->
+   <div class="section">
+     <h2>Ressources Istio Déployées</h2>
+     <table>
+       <tr>
+         <th>Ressource</th>
+         <th>Rôle</th>
+         <th>Exemple</th>
+       </tr>
+       <tr>
+         <td><code>Gateway</code></td>
+         <td>Point d'entrée du mesh</td>
+         <td>Port 80/443, hosts virtuels</td>
+       </tr>
+       <tr>
+         <td><code>VirtualService</code></td>
+         <td>Règles de routage</td>
+         <td>Header-based routing, weights</td>
+       </tr>
+       <tr>
+         <td><code>DestinationRule</code></td>
+         <td>Stratégies de trafic</td>
+         <td>Subsets (v1/v2), load balancing</td>
+       </tr>
+       <tr>
+         <td><code>PeerAuthentication</code></td>
+         <td>Config mTLS</td>
+         <td>STRICT/PERMISSIVE mode</td>
+       </tr>
+       <tr>
+         <td><code>AuthorizationPolicy</code></td>
+         <td>Contrôle d'accès</td>
+         <td>ALLOW/DENY basé sur identité</td>
+       </tr>
+     </table>
+   </div>
+
+   <!-- Applications déployées -->
+   <div class="section">
+     <h2>Applications Microservices</h2>
+     <div class="grid">
+       <div class="card">
+         <h3>webapp (Frontend)</h3>
+         <p>Interface web, appelle l'API catalog, 2/2 containers (app + istio-proxy)</p>
+       </div>
+       <div class="card">
+         <h3>catalog (Backend)</h3>
+         <p>API REST produits, JSON, 2/2 containers, accessible via service mesh</p>
+       </div>
+     </div>
+     <p style="margin-top: 16px; color: #8b949e;">
+       <strong>Flux :</strong> User → istio-ingressgateway → webapp → catalog (tout en mTLS)
+     </p>
+   </div>
+
+   <!-- Observabilité -->
+   <div class="section">
+     <h2>Dashboards Opérationnels</h2>
+     <div class="grid">
+       <div class="card">
+         <h3>Grafana</h3>
+         <p>Métriques chiffrées : 1.93 req/s, 100% success rate, latence ~5ms (p50/p90/p99)</p>
+       </div>
+       <div class="card">
+         <h3>Kiali</h3>
+         <p>Graphe animé du mesh, visualisation trafic temps réel, cadenas mTLS</p>
+       </div>
+       <div class="card">
+         <h3>Jaeger</h3>
+         <p>Tracing distribué, suivre une requête bout-en-bout, analyse latence</p>
+       </div>
+       <div class="card">
+         <h3>Prometheus</h3>
+         <p>Base de données métriques, scrapping automatique, requêtes PromQL</p>
+       </div>
+     </div>
+   </div>
+
+   <!-- Méthodologie -->
+   <div class="section">
+     <h2>Méthodologie & Best Practices</h2>
+     <ul>
+       <li><strong>Production-like</strong> : Cluster bare-metal 3 nœuds (Talos Linux)</li>
+       <li><strong>Sécurité renforcée</strong> : PodSecurity privileged mode pour capabilities NET_ADMIN</li>
+       <li><strong>Injection automatique</strong> : Label namespace pour activation transparente</li>
+       <li><strong>Isolation réseau</strong> : mTLS entre tous les services (chiffrement + auth)</li>
+       <li><strong>Observabilité complète</strong> : 4 outils complémentaires (Prometheus/Grafana/Kiali/Jaeger)</li>
+       <li><strong>Ressources optimisées</strong> : ~600 Mo RAM total Istio (istiod + gateways + addons)</li>
+       <li><strong>Mode sidecar</strong> : ~50 Mo RAM par pod applicatif (coût du proxy)</li>
+     </ul>
+   </div>
+
+   <!-- Technologies -->
+   <div class="section">
+     <h2>Technologies & Outils</h2>
+     <div>
+       <span class="tech-badge">Kubernetes 1.33</span>
+       <span class="tech-badge">Talos Linux</span>
+       <span class="tech-badge">Istio 1.28</span>
+       <span class="tech-badge">Envoy Proxy</span>
+       <span class="tech-badge">Prometheus</span>
+       <span class="tech-badge">Grafana</span>
+       <span class="tech-badge">Kiali</span>
+       <span class="tech-badge">Jaeger</span>
+       <span class="tech-badge">istioctl CLI</span>
+       <span class="tech-badge">YAML</span>
+       <span class="tech-badge">mTLS/SPIFFE</span>
+       <span class="tech-badge">xDS API</span>
+     </div>
+   </div>
+
+   <!-- Livrables -->
+   <div class="section">
+     <h2>Livrables</h2>
+     <ul>
+       <li>Cluster Kubernetes 3 nœuds opérationnel (Talos Linux)</li>
+       <li>Istio service mesh configuré (mode sidecar, profil demo)</li>
+       <li>Application microservices déployée (webapp + catalog)</li>
+       <li>Gateway Istio avec VirtualService (routage HTTP)</li>
+       <li>Observabilité complète (Prometheus, Grafana, Kiali, Jaeger)</li>
+       <li>Métriques temps réel : 1.93 req/s, 100% success, latence 5ms</li>
+       <li>Graphe topologique animé (Kiali) avec mTLS visible</li>
+       <li>Documentation technique complète (architecture, concepts, commandes)</li>
+     </ul>
+   </div>
+
+   <!-- Prochaines étapes -->
+   <div class="section">
+     <h2>Évolutions Prévues</h2>
+     <ul>
+       <li>Tests de résilience (retry automatique, circuit breaker, timeout)</li>
+       <li>Canary deployment (déploiement progressif v1 → v2)</li>
+       <li>Autorisation fine (AuthorizationPolicy, JWT, RBAC)</li>
+       <li>Egress control (ServiceEntry, trafic sortant)</li>
+       <li>Multi-cluster mesh (fédération Istio)</li>
+       <li>Mode Ambient (alternative au sidecar, moins de ressources)</li>
+       <li>GitOps avec ArgoCD (déploiement déclaratif)</li>
+     </ul>
+   </div>
+
+ </div>
+</body>
+</html>
