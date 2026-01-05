@@ -5,158 +5,169 @@
  <title>Pipeline DevSecOps GitLab & Kubernetes</title>
  <meta name="viewport" content="width=device-width, initial-scale=1" />
  <style>
-   body { 
-     font-family: 'Segoe UI', Arial, sans-serif; 
-     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-     color: #2c2c2c; 
-     margin: 0; 
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   body {
+     font-family: 'Monaco', 'Courier New', monospace;
+     background: #0d1117;
+     color: #c9d1d9;
+     margin: 0;
      padding: 40px 20px;
      min-height: 100vh;
    }
-   .container { 
-     max-width: 800px; 
-     margin: 0 auto; 
-     background: #fff; 
-     padding: 48px; 
-     border-radius: 16px; 
-     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+   .container {
+     max-width: 800px;
+     margin: 0 auto;
+     background: #161b22;
+     padding: 32px;
+     border-radius: 12px;
+     border: 1px solid #30363d;
    }
-   h1 { 
-     color: #667eea;
-     font-size: 2.5em;
+   h1 {
+     color: #58a6ff;
+     font-size: 2em;
      margin-bottom: 8px;
-     font-weight: 700;
+     font-weight: 600;
    }
    .tagline {
-     color: #666;
-     font-size: 1.2em;
-     margin-bottom: 40px;
+     color: #8b949e;
+     font-size: 1.1em;
+     margin-bottom: 24px;
      font-style: italic;
    }
    .badge-container {
      display: flex;
-     gap: 12px;
-     margin-bottom: 40px;
+     gap: 8px;
+     margin-bottom: 24px;
      flex-wrap: wrap;
    }
    .badge {
-     background: #667eea;
+     background: #1f6feb;
      color: white;
-     padding: 8px 16px;
-     border-radius: 20px;
-     font-size: 0.85em;
-     font-weight: 600;
+     padding: 6px 12px;
+     border-radius: 16px;
+     font-size: 0.8em;
+     font-weight: 500;
+     border: 1px solid #30363d;
    }
-   h2 { 
-     color: #667eea;
-     font-size: 1.8em; 
-     margin: 48px 0 24px 0; 
-     border-bottom: 3px solid #667eea;
-     padding-bottom: 12px; 
+   h2 {
+     color: #f0883e;
+     font-size: 1.4em;
+     margin: 32px 0 16px 0;
+     border-bottom: 1px solid #30363d;
+     padding-bottom: 8px;
    }
    .intro {
-     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-     padding: 32px;
-     border-radius: 12px;
-     font-size: 1.1em;
-     line-height: 1.8;
-     margin: 32px 0;
+     background: #0d1117;
+     padding: 24px;
+     border-radius: 8px;
+     border: 1px solid #30363d;
+     font-size: 1em;
+     line-height: 1.7;
+     margin: 24px 0;
    }
    .pipeline-visual {
-     background: #2d3748;
-     color: #68d391;
-     padding: 24px;
-     border-radius: 12px;
-     font-family: 'Courier New', monospace;
-     font-size: 0.95em;
+     background: #0d1117;
+     color: #58a6ff;
+     padding: 16px;
+     border-radius: 8px;
+     font-family: 'Monaco', monospace;
+     font-size: 0.9em;
      overflow-x: auto;
-     margin: 32px 0;
-     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+     margin: 24px 0;
+     border: 1px solid #30363d;
    }
    .stage {
      display: inline-block;
-     padding: 8px 16px;
+     padding: 6px 12px;
      margin: 4px;
-     background: #667eea;
+     background: #1f6feb;
      color: white;
      border-radius: 6px;
-     font-weight: 600;
+     font-weight: 500;
+     font-size: 0.85em;
    }
    .features-grid {
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-     gap: 24px;
-     margin: 32px 0;
+     gap: 16px;
+     margin: 24px 0;
    }
    .feature-card {
-     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-     padding: 24px;
-     border-radius: 12px;
+     background: #0d1117;
+     padding: 16px;
+     border-radius: 8px;
+     border: 1px solid #30363d;
      transition: transform 0.3s, box-shadow 0.3s;
    }
    .feature-card:hover {
      transform: translateY(-4px);
-     box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+     border-color: #58a6ff;
+     box-shadow: 0 4px 12px rgba(24, 106, 255, 0.2);
    }
    .feature-card h3 {
-     color: #667eea;
-     font-size: 1.2em;
+     color: #58a6ff;
+     font-size: 1.1em;
      margin-top: 0;
+     margin-bottom: 8px;
    }
    .tech-list {
      list-style: none;
      padding: 0;
+     margin: 16px 0;
    }
    .tech-list li {
-     padding: 12px 0;
-     border-bottom: 1px solid #e2e8f0;
+     padding: 8px 0;
+     border-bottom: 1px solid #30363d;
      display: flex;
      align-items: center;
+     color: #8b949e;
    }
    .tech-list li:before {
      content: "⚡";
-     margin-right: 12px;
-     font-size: 1.3em;
+     margin-right: 10px;
+     font-size: 1.1em;
+     color: #58a6ff;
    }
    .highlight-box {
-     background: #fff5e6;
-     border-left: 5px solid #ff9800;
-     padding: 24px;
-     margin: 32px 0;
-     border-radius: 8px;
+     background: #0d1117;
+     border-left: 3px solid #f0883e;
+     padding: 16px;
+     margin: 24px 0;
+     border-radius: 6px;
+     border: 1px solid #30363d;
    }
    .highlight-box strong {
-     color: #ff9800;
-     font-size: 1.1em;
+     color: #f0883e;
+     font-size: 1em;
    }
    .back-link {
      display: inline-block;
-     margin-bottom: 32px;
-     color: #667eea;
+     margin-bottom: 24px;
+     color: #58a6ff;
      text-decoration: none;
-     font-weight: 600;
-     font-size: 1.1em;
+     font-weight: 500;
    }
    .back-link:hover {
      text-decoration: underline;
    }
    .footer-note {
      text-align: center;
-     margin-top: 60px;
-     padding-top: 32px;
-     border-top: 2px solid #e2e8f0;
-     color: #718096;
+     margin-top: 40px;
+     padding-top: 20px;
+     border-top: 1px solid #30363d;
+     color: #8b949e;
      font-style: italic;
+     font-size: 0.9em;
    }
  </style>
 </head>
 <body>
  <div class="container">
    <a href="../../index.html" class="back-link">← Retour au portfolio</a>
-   
+
    <h1>Pipeline DevSecOps</h1>
    <div class="tagline">GitLab self-hosted & Kubernetes Talos</div>
-   
+
    <div class="badge-container">
      <span class="badge">GitLab EE Self-Hosted</span>
      <span class="badge">Kubernetes Talos</span>
@@ -166,8 +177,8 @@
    </div>
 
    <div class="intro">
-     Conception et déploiement d'une chaîne CI/CD complète avec GitLab auto-hébergé sur infrastructure 
-     Proxmox. Le projet intègre tests automatisés, scans de sécurité multi-niveaux, monitoring temps réel 
+     Conception et déploiement d'une chaîne CI/CD complète avec GitLab auto-hébergé sur infrastructure
+     Proxmox. Le projet intègre tests automatisés, scans de sécurité multi-niveaux, monitoring temps réel
      et déploiement automatisé sur cluster Kubernetes de production.
    </div>
 
@@ -181,8 +192,8 @@
    </div>
 
    <div class="highlight-box">
-     <strong>Challenge technique :</strong> Orchestration complète d'une application Python depuis 
-     le code source jusqu'au déploiement en production, avec sécurité intégrée et observabilité temps réel 
+     <strong>Challenge technique :</strong> Orchestration complète d'une application Python depuis
+     le code source jusqu'au déploiement en production, avec sécurité intégrée et observabilité temps réel
      sur infrastructure 100% auto-hébergée.
    </div>
 
@@ -190,19 +201,19 @@
    <div class="features-grid">
      <div class="feature-card">
        <h3>GitLab Enterprise Edition</h3>
-       <p>Instance auto-hébergée complète : CI/CD, Container Registry, Package Registry</p>
+       <p style="color: #8b949e; margin: 0;">Instance auto-hébergée complète : CI/CD, Container Registry, Package Registry</p>
      </div>
      <div class="feature-card">
        <h3>Kubernetes Talos</h3>
-       <p>Cluster 3 nodes avec OS immutable et sécurité renforcée</p>
+       <p style="color: #8b949e; margin: 0;">Cluster 3 nodes avec OS immutable et sécurité renforcée</p>
      </div>
      <div class="feature-card">
        <h3>Monitoring Stack</h3>
-       <p>Prometheus + Grafana avec métriques applicatives custom</p>
+       <p style="color: #8b949e; margin: 0;">Prometheus + Grafana avec métriques applicatives custom</p>
      </div>
      <div class="feature-card">
        <h3>Review Apps</h3>
-       <p>Environnements éphémères Kubernetes par feature branch</p>
+       <p style="color: #8b949e; margin: 0;">Environnements éphémères Kubernetes par feature branch</p>
      </div>
    </div>
 
@@ -220,31 +231,31 @@
    <div class="features-grid">
      <div class="feature-card">
        <h3>CI/CD</h3>
-       Pipelines modulaires, artefacts, cache, variables sécurisées, review apps
+       <p style="color: #8b949e; margin: 0;">Pipelines modulaires, artefacts, cache, variables sécurisées, review apps</p>
      </div>
      <div class="feature-card">
        <h3>Conteneurisation</h3>
-       Dockerfile multi-stage, registry privé, scanning vulnérabilités
+       <p style="color: #8b949e; margin: 0;">Dockerfile multi-stage, registry privé, scanning vulnérabilités</p>
      </div>
      <div class="feature-card">
        <h3>Orchestration</h3>
-       Deployments, Services, Secrets, ConfigMaps, Health Checks
+       <p style="color: #8b949e; margin: 0;">Deployments, Services, Secrets, ConfigMaps, Health Checks</p>
      </div>
      <div class="feature-card">
        <h3>Observabilité</h3>
-       Prometheus metrics, Grafana dashboards, PromQL queries
+       <p style="color: #8b949e; margin: 0;">Prometheus metrics, Grafana dashboards, PromQL queries</p>
      </div>
    </div>
 
    <h2>Résultats</h2>
    <div class="intro">
-     <ul style="margin: 0; padding-left: 24px;">
-       <li>Infrastructure 100% auto-hébergée et maîtrisée</li>
-       <li>Pipeline robuste avec 6 stages et 4 types de scans sécurité</li>
-       <li>Déploiement production haute disponibilité (2 replicas)</li>
-       <li>Monitoring temps réel avec métriques applicatives</li>
-       <li>Architecture modulaire et maintenable (fichiers CI/CD séparés)</li>
-       <li>Documentation complète et versionnée</li>
+     <ul style="margin: 0; padding-left: 20px;">
+       <li style="color: #8b949e; margin-bottom: 6px;">Infrastructure 100% auto-hébergée et maîtrisée</li>
+       <li style="color: #8b949e; margin-bottom: 6px;">Pipeline robuste avec 6 stages et 4 types de scans sécurité</li>
+       <li style="color: #8b949e; margin-bottom: 6px;">Déploiement production haute disponibilité (2 replicas)</li>
+       <li style="color: #8b949e; margin-bottom: 6px;">Monitoring temps réel avec métriques applicatives</li>
+       <li style="color: #8b949e; margin-bottom: 6px;">Architecture modulaire et maintenable (fichiers CI/CD séparés)</li>
+       <li style="color: #8b949e; margin-bottom: 6px;">Documentation complète et versionnée</li>
      </ul>
    </div>
 
