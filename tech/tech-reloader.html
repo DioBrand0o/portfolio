@@ -4,22 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reloader</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Monaco', 'Courier New', monospace;
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .tech-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .back-nav {
+      margin-bottom: 30px;
+      display: flex;
+      gap: 10px;
+    }
+    .back-link {
+      color: #58a6ff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .back-link:hover {
+      background-color: #161b22;
+      border-color: #58a6ff;
+    }
+    h1 {
+      color: #58a6ff;
+      font-size: 2em;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .section {
+      margin: 40px 0;
+      padding: 24px;
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+    }
+    .section p {
+      color: #8b949e;
+      margin-bottom: 16px;
+    }
+    .section a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    .section a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="tech-container">
-      <div class="back-nav">
-        <a href="tech.html" class="back-link">← Hub Technique</a>
-        <a href="index.html" class="back-link">🏠 Accueil</a>
-      </div>
+  <div class="tech-container">
+    <div class="back-nav">
+      <a href="tech.html" class="back-link">← Hub Technique</a>
+      <a href="index.html" class="back-link">🏠 Accueil</a>
+    </div>
 
-      <h1 style="text-align: center;">♻️ Reloader</h1>
+    <h1>♻️ Reloader</h1>
 
-      <div class="section">
-        <p>Reloader redémarre automatiquement les pods quand les secrets/configmaps changent :</p>
-        <p><a href="https://github.com/DioBrand0o/portfolio/tree/main/projects/terraform-homelab/07-k8s-automation-reloader.tf" target="_blank">🔗 Voir le fichier 07-k8s-automation-reloader.tf</a></p>
-      </div>
+    <div class="section">
+      <p>Reloader redémarre automatiquement les pods quand les <strong>ConfigMaps</strong> ou <strong>Secrets</strong> sont mis à jour, sans intervention manuelle.</p>
+      <p>Intégration via Helm dans le cluster :</p>
+      <p><a href="https://github.com/DioBrand0o/portfolio/tree/main/projects/terraform-homelab/07-k8s-automation-reloader.tf" target="_blank">🔗 Voir le fichier 07-k8s-automation-reloader.tf</a></p>
     </div>
   </div>
 </body>
