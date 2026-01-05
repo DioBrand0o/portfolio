@@ -2,86 +2,161 @@
 <html lang="fr">
 <head>
  <meta charset="UTF-8" />
- <title>Accueil Portfolio Technique</title>
+ <title>Accueil Portfolio Technique - Zack B.</title>
  <meta name="viewport" content="width=device-width, initial-scale=1" />
- <link rel="stylesheet" href="../assets/css/style.css" />
  <style>
-   body { font-family: Arial, sans-serif; background: #f4f8fc; color: #2c2c2c; margin: 0; padding: 30px;}
-   .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 32px 24px; border-radius: 10px; box-shadow:0 3px 16px #b5bac055;}
-   h1 { text-align: center; }
-   h2 { color: #2c2c2c; font-size: 1.3em; margin: 35px 0 20px 0; border-bottom: 2px solid #2c2c2c; padding-bottom: 8px; }
-   .intro { text-align: center; font-size: 1.15em; margin-bottom: 32px; color: #463;}
-   .project-list { margin-top: 28px;}
-   .project-ok, .project-pending { display: flex; align-items: center; padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; }
-   .project-ok { background: #e3f7ef; border-left: 6px solid #49b78f; }
-   .project-ok a { text-decoration: none; color: #217366; font-weight: bold; margin-left: 12px; }
-   .project-ok a:hover { text-decoration: underline; }
-   .project-pending { background: #f5f6fa; border-left: 6px solid #aaa; color: #bbb; font-style: italic;}
-   .project-title { font-size: 1.09em; font-weight: bold; margin-right: 10px;}
-   .call { text-align: center; color: #777; font-size: 0.98em; margin-top: 60px;}
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   body {
+     font-family: 'Monaco', 'Courier New', monospace;
+     background: #0d1117;
+     color: #c9d1d9;
+     margin: 0;
+     padding: 30px;
+   }
+   .container {
+     max-width: 700px;
+     margin: 40px auto;
+     background: #161b22;
+     padding: 32px 24px;
+     border-radius: 10px;
+     border: 1px solid #30363d;
+     box-shadow: 0 3px 16px rgba(171, 186, 192, 0.15);
+   }
+   h1 {
+     text-align: center;
+     color: #58a6ff;
+     margin-bottom: 20px;
+   }
+   h2 {
+     color: #f0883e;
+     font-size: 1.3em;
+     margin: 35px 0 20px 0;
+     border-bottom: 1px solid #30363d;
+     padding-bottom: 8px;
+   }
+   .intro {
+     text-align: center;
+     font-size: 1.1em;
+     margin-bottom: 32px;
+     color: #8b949e;
+     line-height: 1.6;
+   }
+   .project-list {
+     margin-top: 20px;
+   }
+   .project-ok, .project-pending {
+     display: flex;
+     align-items: center;
+     padding: 14px 18px;
+     border-radius: 8px;
+     margin-bottom: 12px;
+     transition: transform 0.2s;
+   }
+   .project-ok {
+     background: #0f4d2d15;
+     border-left: 4px solid #49b78f;
+   }
+   .project-ok:hover {
+     transform: translateX(4px);
+     background: #0f4d2d25;
+   }
+   .project-ok a {
+     text-decoration: none;
+     color: #49b78f;
+     font-weight: 500;
+     margin-left: 12px;
+   }
+   .project-ok a:hover {
+     text-decoration: underline;
+   }
+   .project-pending {
+     background: #30363d30;
+     border-left: 4px solid #586069;
+     color: #8b949e;
+     font-style: italic;
+   }
+   .project-title {
+     font-size: 1.05em;
+     font-weight: 500;
+     color: #c9d1d9;
+   }
+   .call {
+     text-align: center;
+     color: #8b949e;
+     font-size: 0.95em;
+     margin-top: 50px;
+     padding-top: 20px;
+     border-top: 1px solid #30363d;
+   }
  </style>
 </head>
 <body>
  <div class="container">
    <h1>Portfolio Technique DevSecOps</h1>
    <div class="intro">
-     Bienvenue sur mon espace d'accueil des projets d'automatisation, déploiement et sécurité cloud/Hybride/barre Metal.<br>
+     Bienvenue sur mon espace d'accueil des projets d'automatisation, déploiement et sécurité cloud/hybride/bare metal.<br>
+     Découvrez mes réalisations en DevSecOps, Kubernetes, et infrastructure as code.
    </div>
-   
+
    <!-- Section On-Premise -->
    <h2>Solutions On-Premise / Self-Hosted</h2>
    <div class="project-list">
      <div class="project-ok">
        <span class="project-title">Talos (Lab Kubernetes sécurisé)</span>
-       <a href="tech.html" target="_blank">Découvrir le projet</a>
+       <a href="tech.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">Migration Azure DevOps vers GitLab CI + Vault</span>
-       <a href="../projects/azure-devops-migration/main.html">Découvrir le projet</a>
+       <a href="../projects/azure-devops-migration/main.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-ok">
-       <span class="project-title">Pipeline DevSecOps avec GitLab self hosted & Kubernetes</span>
-       <a href="../projects/gitlab/gitlab-cicd.html">Découvrir le projet</a>
+       <span class="project-title">Pipeline DevSecOps avec GitLab self-hosted & Kubernetes</span>
+       <a href="../projects/gitlab/gitlab-cicd.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">Observabilité & Monitoring</span>
-       <a href="../projects/observabilite/main.html">Découvrir le projet</a>
+       <a href="../projects/observabilite/main.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">DevSecOps Automated Security Pipeline</span>
-       <a href="../projects/devsecops/foundation.html">Découvrir le projet</a>
+       <a href="../projects/devsecops/foundation.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">Service Mesh Istio (Microservices)</span>
-       <a href="../projects/Service_Mesh_Istio/Service_Mesh_Istio.html">Découvrir le projet</a>
+       <a href="../projects/Service_Mesh_Istio/Service_Mesh_Istio.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-pending">
-       <span class="project-title">Ansible</span>&nbsp;— en construction
+       <span class="project-title">Ansible</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en construction</span>
      </div>
      <div class="project-pending">
-       <span class="project-title">Tetragon/Falco/Falcosidekick</span>&nbsp;— en construction
+       <span class="project-title">Tetragon/Falco/Falcosidekick</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en construction</span>
      </div>
      <div class="project-pending">
-       <span class="project-title">NAS/LinStor résilience et optimisation des coûts</span>&nbsp;— en construction
-     </div>        
+       <span class="project-title">NAS/LinStor résilience et optimisation des coûts</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en construction</span>
+     </div>
    </div>
-   
+
    <!-- Section Azure DevOps -->
    <h2>Azure DevOps & Terraform</h2>
    <div class="project-list">
      <div class="project-ok">
        <span class="project-title">Portfolio DevOps Azure (13 projets)</span>
-       <a href="https://www.linkedin.com/in/zack-bou" target="_blank">Me contacter pour accéder</a>
+       <a href="https://www.linkedin.com/in/zack-bou" target="_blank">Me contacter →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">Terraform Industrialisation & GitLab CI</span>
-       <a href="../projects/gitlab-terraform-industrialisation/main.html" target="_blank">Découvrir le projet</a>
+       <a href="../projects/gitlab-terraform-industrialisation/main.html" target="_blank">Découvrir →</a>
      </div>
      <div class="project-pending">
-       <span class="project-title">AKS</span>&nbsp;— en construction
+       <span class="project-title">AKS</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en construction</span>
      </div>
      <div class="project-pending">
-       <span class="project-title">Integration-sécurity</span>&nbsp;— en construction
+       <span class="project-title">Integration-sécurity</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en construction</span>
      </div>
    </div>
 
@@ -90,15 +165,15 @@
    <div class="project-list">
      <div class="project-ok">
        <span class="project-title">Systems Engineering Portfolio</span>
-       <a href="https://github.com/DioBrand0o/Systems_X_Engineering" target="_blank">Voir sur GitHub</a>
+       <a href="https://github.com/DioBrand0o/Systems_X_Engineering" target="_blank">GitHub →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">Blockchain Microservices (Rust + K8s)</span>
-       <a href="https://github.com/DioBrand0o/Systems_X_Engineering/tree/main/blockchain-microservices" target="_blank">Découvrir le projet</a>
+       <a href="https://github.com/DioBrand0o/Systems_X_Engineering/tree/main/blockchain-microservices" target="_blank">GitHub →</a>
      </div>
      <div class="project-ok">
        <span class="project-title">do-serverless (VMM + OCI Runtime)</span>
-       <a href="https://github.com/DioBrand0o/Systems_X_Engineering/tree/main/do-serverless" target="_blank">Découvrir le projet</a>
+       <a href="https://github.com/DioBrand0o/Systems_X_Engineering/tree/main/do-serverless" target="_blank">GitHub →</a>
      </div>
    </div>
 
@@ -107,15 +182,16 @@
    <div class="project-list">
      <div class="project-ok">
        <span class="project-title">Microsoft Azure Fundamentals (AZ-900)</span>
-       <a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/" target="_blank">Voir la certification</a>
+       <a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/" target="_blank">Voir →</a>
      </div>
      <div class="project-pending">
-       <span class="project-title">CKA (Certified Kubernetes Administrator)</span>&nbsp;— en préparation
+       <span class="project-title">CKA (Certified Kubernetes Administrator)</span>
+       <span style="margin-left: 12px; color: #8b949e;">— en préparation</span>
      </div>
    </div>
 
    <div class="call">
-     Plus de modules et d'exemples techniques arrivent prochainement !
+     Plus de modules et d'exemples techniques arrivent prochainement !<br>
    </div>
  </div>
 </body>
